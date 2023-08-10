@@ -182,12 +182,6 @@ def get_word_match_indices(m_lines, w_lines, m_words, w_words) -> (list[int], li
         m_line_len = len(m_lines[line_i])
         w_line_len = len(w_lines[line_i])
 
-        wordos_m = [i["word"] for i in m_lines[line_i]]
-        wordos_w = [i["word"] for i in w_lines[line_i]]
-        print()
-        print(wordos_m)
-        print(wordos_w)
-
         # Initialize the array with leading row and column of zeroes
         default_match = {"matches": 0, "m_i": None, "w_i": None, "syl_dif": 999}
         match_arr = [[default_match] * (w_line_len + 1)] + [[default_match] + [None] * w_line_len for _ in range(m_line_len)]
@@ -233,14 +227,14 @@ def get_word_match_indices(m_lines, w_lines, m_words, w_words) -> (list[int], li
         w_word_i += w_line_len
 
         # Debug the matches array
-        print()
-        debug_arr = []
-        for j in range(len(match_arr[0])):
-            debug_line = []
-            for i, l in enumerate(match_arr):
-                debug_line.append([l[j]["matches"], (l[j]["m_i"], l[j]["w_i"]), l[j]["syl_dif"]])
-            print(debug_line)
-            debug_arr.append(debug_line)
+        # print()
+        # debug_arr = []
+        # for j in range(len(match_arr[0])):
+        #     debug_line = []
+        #     for i, l in enumerate(match_arr):
+        #         debug_line.append([l[j]["matches"], (l[j]["m_i"], l[j]["w_i"]), l[j]["syl_dif"]])
+        #     print(debug_line)
+        #     debug_arr.append(debug_line)
 
         # Trace backwards to get the optimal matches
         matches_m = []
@@ -254,11 +248,6 @@ def get_word_match_indices(m_lines, w_lines, m_words, w_words) -> (list[int], li
             trace_prev_m = match_arr[trace_m_i - 1][trace_w_i]
             trace_prev_w = match_arr[trace_m_i][trace_w_i - 1]
 
-            print()
-            print("comparing " + m_words[match_arr[trace_m_i][trace_w_i]["m_i"]]["word"] + " and " + w_words[match_arr[trace_m_i][trace_w_i]["w_i"]]["word"])
-            print("at " + str(trace_m_i) + ", " + str(trace_w_i))
-            print()
-
             if match(m_words[trace_m_i + m_word_i - m_line_len - 1]["word"], \
                     w_words[trace_w_i + w_word_i - w_line_len - 1]["word"]):
                 
@@ -267,30 +256,23 @@ def get_word_match_indices(m_lines, w_lines, m_words, w_words) -> (list[int], li
                 
                 if matches == trace_prev_m["matches"] and syl_dif >= trace_prev_m["syl_dif"]:
                     trace_m_i -= 1
-                    print("match, go back M")
                 elif matches == trace_prev_w["matches"] and syl_dif >= trace_prev_w["syl_dif"]:
                     trace_w_i -= 1
-                    print("match, go back W")
                 else:
                     matches_m.insert(0, trace_curr["m_i"])
                     matches_w.insert(0, trace_curr["w_i"])
                     trace_m_i -= 1
                     trace_w_i -= 1
-                    print("match, go back BOTH")
             else:
                 if trace_prev_m["matches"] > trace_prev_w["matches"]:
                     trace_m_i -= 1
-                    print("no match, go back M")
                 elif trace_prev_m["matches"] < trace_prev_w["matches"]:
                     trace_w_i -= 1
-                    print("no match, go back W")
                 else:
                     if (trace_prev_m["m_i"] != None and trace_prev_w["m_i"] == None) or trace_prev_m["syl_dif"] < trace_prev_w["syl_dif"]:
                         trace_m_i -= 1
-                        print("no match, go back M by syllables")
                     elif (trace_prev_w["m_i"] != None and trace_prev_m["m_i"] == None) or trace_prev_m["syl_dif"] >= trace_prev_w["syl_dif"]:
                         trace_w_i -= 1
-                        print("no match, go back W by syllables")
 
             trace_curr = match_arr[trace_m_i][trace_w_i]
         
@@ -301,10 +283,6 @@ def get_word_match_indices(m_lines, w_lines, m_words, w_words) -> (list[int], li
 
         m_words_matches.extend(matches_m)
         w_words_matches.extend(matches_w)
-
-        print()
-        print(matches_m)
-        print(matches_w)
 
     return m_words_matches, w_words_matches
 
@@ -364,27 +342,3 @@ for i in range(len(m_matches)):
         print()
 
     prev_i = i
-
-# print("\namogus\n")
-# bobo = []
-# for word in musixmatch_words:
-#     bobo.append(word["word"])
-
-# print(bobo)
-
-# bobwo = []
-# for word in whisper_words:
-#     bobwo.append(word["word"])
-
-# print(bobwo)
-
-# gaga = []
-
-# for line in musixmatch_lines:
-#     print(line)
-
-
-# print(musixmatch_words[406]["word"])
-# print(whisper_words[398]["word"])
-# print(musixmatch_words)
-
