@@ -1,0 +1,2415 @@
+[
+    {
+      "end": 11.36,
+      "text": " Hear that?",
+      "start": 10.856,
+      "words": [
+        {
+          "end": 11.199,
+          "word": "Hear",
+          "score": 0.742,
+          "start": 10.856
+        },
+        {
+          "end": 11.36,
+          "word": "that?",
+          "score": 0.314,
+          "start": 11.239
+        }
+      ]
+    },
+    {
+      "end": 20.914,
+      "text": " Hey alright, I am a vulture.",
+      "start": 18.412,
+      "words": [
+        {
+          "end": 18.712,
+          "word": "Hey",
+          "score": 0.551,
+          "start": 18.412
+        },
+        {
+          "end": 19.133,
+          "word": "alright,",
+          "score": 0.314,
+          "start": 18.832
+        },
+        {
+          "end": 19.653,
+          "word": "I",
+          "score": 0.825,
+          "start": 19.553
+        },
+        {
+          "end": 19.853,
+          "word": "am",
+          "score": 0.915,
+          "start": 19.753
+        },
+        {
+          "end": 20.073,
+          "word": "a",
+          "score": 0.553,
+          "start": 19.993
+        },
+        {
+          "end": 20.614,
+          "word": "vulture.",
+          "score": 0.395,
+          "start": 20.113
+        }
+      ]
+    },
+    {
+      "end": 23.296,
+      "text": "I've got ear, ear, eyes.",
+      "start": 20.914,
+      "words": [
+        {
+          "end": 21.054,
+          "word": "I've",
+          "score": 0.489,
+          "start": 20.914
+        },
+        {
+          "end": 21.294,
+          "word": "got",
+          "score": 0.711,
+          "start": 21.094
+        },
+        {
+          "end": 21.735,
+          "word": "ear,",
+          "score": 0.728,
+          "start": 21.495
+        },
+        {
+          "end": 22.155,
+          "word": "ear,",
+          "score": 0.751,
+          "start": 21.935
+        },
+        {
+          "end": 22.856,
+          "word": "eyes.",
+          "score": 0.364,
+          "start": 22.656
+        }
+      ]
+    },
+    {
+      "end": 24.717,
+      "text": "I make a supper.",
+      "start": 23.296,
+      "words": [
+        {
+          "end": 23.416,
+          "word": "I",
+          "score": 0.839,
+          "start": 23.296
+        },
+        {
+          "end": 23.656,
+          "word": "make",
+          "score": 0.942,
+          "start": 23.456
+        },
+        {
+          "end": 23.816,
+          "word": "a",
+          "score": 0.764,
+          "start": 23.756
+        },
+        {
+          "end": 24.417,
+          "word": "supper.",
+          "score": 0.631,
+          "start": 23.857
+        }
+      ]
+    },
+    {
+      "end": 26.599,
+      "text": "I love your culture.",
+      "start": 24.717,
+      "words": [
+        {
+          "end": 24.857,
+          "word": "I",
+          "score": 0.669,
+          "start": 24.717
+        },
+        {
+          "end": 25.118,
+          "word": "love",
+          "score": 0.478,
+          "start": 24.897
+        },
+        {
+          "end": 25.598,
+          "word": "your",
+          "score": 0.514,
+          "start": 25.338
+        },
+        {
+          "end": 26.299,
+          "word": "culture.",
+          "score": 0.453,
+          "start": 25.798
+        }
+      ]
+    },
+    {
+      "end": 28.28,
+      "text": "I've got no nurture.",
+      "start": 26.599,
+      "words": [
+        {
+          "end": 26.699,
+          "word": "I've",
+          "score": 0.278,
+          "start": 26.599
+        },
+        {
+          "end": 26.959,
+          "word": "got",
+          "score": 0.729,
+          "start": 26.739
+        },
+        {
+          "end": 27.439,
+          "word": "no",
+          "score": 0.867,
+          "start": 27.199
+        },
+        {
+          "end": 28.14,
+          "word": "nurture.",
+          "score": 0.681,
+          "start": 27.68
+        }
+      ]
+    },
+    {
+      "end": 30.382,
+      "text": "I'm lying, I am corona.",
+      "start": 28.28,
+      "words": [
+        {
+          "end": 28.38,
+          "word": "I'm",
+          "score": 0.368,
+          "start": 28.28
+        },
+        {
+          "end": 28.72,
+          "word": "lying,",
+          "score": 0.454,
+          "start": 28.4
+        },
+        {
+          "end": 29.081,
+          "word": "I",
+          "score": 0.857,
+          "start": 28.981
+        },
+        {
+          "end": 29.321,
+          "word": "am",
+          "score": 0.605,
+          "start": 29.181
+        },
+        {
+          "end": 30.042,
+          "word": "corona.",
+          "score": 0.682,
+          "start": 29.361
+        }
+      ]
+    },
+    {
+      "end": 32.744,
+      "text": "I've got ear, ear, eyes.",
+      "start": 30.382,
+      "words": [
+        {
+          "end": 30.522,
+          "word": "I've",
+          "score": 0.4,
+          "start": 30.382
+        },
+        {
+          "end": 30.722,
+          "word": "got",
+          "score": 0.428,
+          "start": 30.582
+        },
+        {
+          "end": 31.203,
+          "word": "ear,",
+          "score": 0.754,
+          "start": 30.942
+        },
+        {
+          "end": 31.643,
+          "word": "ear,",
+          "score": 0.712,
+          "start": 31.423
+        },
+        {
+          "end": 32.263,
+          "word": "eyes.",
+          "score": 0.367,
+          "start": 32.063
+        }
+      ]
+    },
+    {
+      "end": 34.265,
+      "text": "I make a supper.",
+      "start": 32.744,
+      "words": [
+        {
+          "end": 32.864,
+          "word": "I",
+          "score": 0.862,
+          "start": 32.744
+        },
+        {
+          "end": 33.124,
+          "word": "make",
+          "score": 0.931,
+          "start": 32.904
+        },
+        {
+          "end": 33.304,
+          "word": "a",
+          "score": 0.721,
+          "start": 33.224
+        },
+        {
+          "end": 33.845,
+          "word": "supper.",
+          "score": 0.62,
+          "start": 33.324
+        }
+      ]
+    },
+    {
+      "end": 36.067,
+      "text": "I love your culture.",
+      "start": 34.265,
+      "words": [
+        {
+          "end": 34.325,
+          "word": "I",
+          "score": 0.833,
+          "start": 34.265
+        },
+        {
+          "end": 34.585,
+          "word": "love",
+          "score": 0.581,
+          "start": 34.365
+        },
+        {
+          "end": 35.026,
+          "word": "your",
+          "score": 0.491,
+          "start": 34.765
+        },
+        {
+          "end": 35.746,
+          "word": "culture.",
+          "score": 0.539,
+          "start": 35.246
+        }
+      ]
+    },
+    {
+      "end": 37.728,
+      "text": "I've got no nurture.",
+      "start": 36.067,
+      "words": [
+        {
+          "end": 36.167,
+          "word": "I've",
+          "score": 0.3,
+          "start": 36.067
+        },
+        {
+          "end": 36.467,
+          "word": "got",
+          "score": 0.757,
+          "start": 36.207
+        },
+        {
+          "end": 36.927,
+          "word": "no",
+          "score": 0.898,
+          "start": 36.687
+        },
+        {
+          "end": 37.648,
+          "word": "nurture.",
+          "score": 0.639,
+          "start": 37.147
+        }
+      ]
+    },
+    {
+      "end": 41.611,
+      "text": "And I'll write the children a jazzy song.",
+      "start": 37.728,
+      "words": [
+        {
+          "end": 37.808,
+          "word": "And",
+          "score": 0.56,
+          "start": 37.728
+        },
+        {
+          "end": 38.529,
+          "word": "I'll",
+          "score": 0.379,
+          "start": 38.048
+        },
+        {
+          "end": 38.749,
+          "word": "write",
+          "score": 0.403,
+          "start": 38.549
+        },
+        {
+          "end": 38.929,
+          "word": "the",
+          "score": 0.435,
+          "start": 38.809
+        },
+        {
+          "end": 39.75,
+          "word": "children",
+          "score": 0.668,
+          "start": 39.009
+        },
+        {
+          "end": 39.91,
+          "word": "a",
+          "score": 0.731,
+          "start": 39.83
+        },
+        {
+          "end": 40.61,
+          "word": "jazzy",
+          "score": 0.722,
+          "start": 39.99
+        },
+        {
+          "end": 41.231,
+          "word": "song.",
+          "score": 0.527,
+          "start": 40.63
+        }
+      ]
+    },
+    {
+      "end": 44.774,
+      "text": "Take you on a journey that I don't ask for.",
+      "start": 41.611,
+      "words": [
+        {
+          "end": 42.071,
+          "word": "Take",
+          "score": 0.722,
+          "start": 41.611
+        },
+        {
+          "end": 42.292,
+          "word": "you",
+          "score": 0.315,
+          "start": 42.131
+        },
+        {
+          "end": 42.592,
+          "word": "on",
+          "score": 0.664,
+          "start": 42.452
+        },
+        {
+          "end": 42.752,
+          "word": "a",
+          "score": 0.659,
+          "start": 42.692
+        },
+        {
+          "end": 43.252,
+          "word": "journey",
+          "score": 0.338,
+          "start": 42.812
+        },
+        {
+          "end": 43.573,
+          "word": "that",
+          "score": 0.743,
+          "start": 43.292
+        },
+        {
+          "end": 43.733,
+          "word": "I",
+          "score": 0.613,
+          "start": 43.653
+        },
+        {
+          "end": 44.013,
+          "word": "don't",
+          "score": 0.464,
+          "start": 43.773
+        },
+        {
+          "end": 44.293,
+          "word": "ask",
+          "score": 0.707,
+          "start": 44.153
+        },
+        {
+          "end": 44.734,
+          "word": "for.",
+          "score": 0.731,
+          "start": 44.433
+        }
+      ]
+    },
+    {
+      "end": 44.954,
+      "text": "Yeah.",
+      "start": 44.774,
+      "words": [
+        {
+          "end": 44.954,
+          "word": "Yeah.",
+          "score": 0.447,
+          "start": 44.774
+        }
+      ]
+    },
+    {
+      "end": 50.137,
+      "text": " So can we let sleeping dogs lie?",
+      "start": 46.595,
+      "words": [
+        {
+          "end": 47.075,
+          "word": "So",
+          "score": 0.83,
+          "start": 46.595
+        },
+        {
+          "end": 47.316,
+          "word": "can",
+          "score": 0.277,
+          "start": 47.195
+        },
+        {
+          "end": 47.436,
+          "word": "we",
+          "score": 0.491,
+          "start": 47.336
+        },
+        {
+          "end": 48.156,
+          "word": "let",
+          "score": 0.427,
+          "start": 47.956
+        },
+        {
+          "end": 49.477,
+          "word": "sleeping",
+          "score": 0.672,
+          "start": 48.236
+        },
+        {
+          "end": 49.877,
+          "word": "dogs",
+          "score": 0.416,
+          "start": 49.617
+        },
+        {
+          "end": 50.117,
+          "word": "lie?",
+          "score": 0.496,
+          "start": 49.917
+        }
+      ]
+    },
+    {
+      "end": 53.339,
+      "text": "Cause everyone bullies me when I say it's mine.",
+      "start": 50.137,
+      "words": [
+        {
+          "end": 50.297,
+          "word": "Cause",
+          "score": 0.254,
+          "start": 50.137
+        },
+        {
+          "end": 50.798,
+          "word": "everyone",
+          "score": 0.36,
+          "start": 50.457
+        },
+        {
+          "end": 51.038,
+          "word": "bullies",
+          "score": 0.155,
+          "start": 50.838
+        },
+        {
+          "end": 51.218,
+          "word": "me",
+          "score": 0.61,
+          "start": 51.058
+        },
+        {
+          "end": 52.038,
+          "word": "when",
+          "score": 0.603,
+          "start": 51.258
+        },
+        {
+          "end": 52.078,
+          "word": "I",
+          "score": 0.001,
+          "start": 52.058
+        },
+        {
+          "end": 52.498,
+          "word": "say",
+          "score": 0.597,
+          "start": 52.158
+        },
+        {
+          "end": 52.719,
+          "word": "it's",
+          "score": 0.268,
+          "start": 52.599
+        },
+        {
+          "end": 53.159,
+          "word": "mine.",
+          "score": 0.491,
+          "start": 52.959
+        }
+      ]
+    },
+    {
+      "end": 56.241,
+      "text": "A little wool over the eyes.",
+      "start": 53.339,
+      "words": [
+        {
+          "end": 53.499,
+          "word": "A",
+          "score": 0.698,
+          "start": 53.339
+        },
+        {
+          "end": 53.899,
+          "word": "little",
+          "score": 0.237,
+          "start": 53.679
+        },
+        {
+          "end": 54.36,
+          "word": "wool",
+          "score": 0.769,
+          "start": 54.119
+        },
+        {
+          "end": 54.78,
+          "word": "over",
+          "score": 0.375,
+          "start": 54.48
+        },
+        {
+          "end": 55.34,
+          "word": "the",
+          "score": 0.438,
+          "start": 55.08
+        },
+        {
+          "end": 56.241,
+          "word": "eyes.",
+          "score": 0.554,
+          "start": 55.5
+        }
+      ]
+    },
+    {
+      "end": 96.92,
+      "text": " Cause everyone believes me When I, I want to love ya I want to make you a I We make a sound out of your culture It got no culture And I'm like a kid in a tennis ball Playing you on the tennis ball I don't have balls yet I'm like a bull in a china shop Knocking on the knuckle Cause I got no culture I got no culture of mine",
+      "start": 68.078,
+      "words": [
+        {
+          "end": 68.378,
+          "word": "Cause",
+          "score": 0.703,
+          "start": 68.078
+        },
+        {
+          "end": 69.019,
+          "word": "everyone",
+          "score": 0.561,
+          "start": 68.398
+        },
+        {
+          "end": 69.519,
+          "word": "believes",
+          "score": 0.382,
+          "start": 69.039
+        },
+        {
+          "end": 69.719,
+          "word": "me",
+          "score": 0.617,
+          "start": 69.539
+        },
+        {
+          "end": 70.02,
+          "word": "When",
+          "score": 0.614,
+          "start": 69.759
+        },
+        {
+          "end": 70.18,
+          "word": "I,",
+          "score": 0.615,
+          "start": 70.08
+        },
+        {
+          "end": 70.64,
+          "word": "I",
+          "score": 0.755,
+          "start": 70.5
+        },
+        {
+          "end": 70.88,
+          "word": "want",
+          "score": 0.546,
+          "start": 70.68
+        },
+        {
+          "end": 71.08,
+          "word": "to",
+          "score": 0.635,
+          "start": 70.94
+        },
+        {
+          "end": 71.341,
+          "word": "love",
+          "score": 0.54,
+          "start": 71.14
+        },
+        {
+          "end": 71.641,
+          "word": "ya",
+          "score": 0.848,
+          "start": 71.401
+        },
+        {
+          "end": 72.081,
+          "word": "I",
+          "score": 0.672,
+          "start": 71.961
+        },
+        {
+          "end": 72.301,
+          "word": "want",
+          "score": 0.495,
+          "start": 72.101
+        },
+        {
+          "end": 72.521,
+          "word": "to",
+          "score": 0.694,
+          "start": 72.321
+        },
+        {
+          "end": 72.742,
+          "word": "make",
+          "score": 0.349,
+          "start": 72.541
+        },
+        {
+          "end": 73.042,
+          "word": "you",
+          "score": 0.624,
+          "start": 72.782
+        },
+        {
+          "end": 73.222,
+          "word": "a",
+          "score": 0.588,
+          "start": 73.142
+        },
+        {
+          "end": 73.662,
+          "word": "I",
+          "score": 0.43,
+          "start": 73.642
+        },
+        {
+          "end": 73.802,
+          "word": "We",
+          "score": 0.508,
+          "start": 73.682
+        },
+        {
+          "end": 74.663,
+          "word": "make",
+          "score": 0.668,
+          "start": 74.223
+        },
+        {
+          "end": 74.863,
+          "word": "a",
+          "score": 0.571,
+          "start": 74.783
+        },
+        {
+          "end": 75.424,
+          "word": "sound",
+          "score": 0.513,
+          "start": 74.903
+        },
+        {
+          "end": 76.164,
+          "word": "out",
+          "score": 0.625,
+          "start": 76.024
+        },
+        {
+          "end": 76.224,
+          "word": "of",
+          "score": 0.009,
+          "start": 76.184
+        },
+        {
+          "end": 76.725,
+          "word": "your",
+          "score": 0.523,
+          "start": 76.344
+        },
+        {
+          "end": 77.465,
+          "word": "culture",
+          "score": 0.522,
+          "start": 76.805
+        },
+        {
+          "end": 77.725,
+          "word": "It",
+          "score": 0.818,
+          "start": 77.605
+        },
+        {
+          "end": 78.026,
+          "word": "got",
+          "score": 0.685,
+          "start": 77.785
+        },
+        {
+          "end": 78.506,
+          "word": "no",
+          "score": 0.796,
+          "start": 78.206
+        },
+        {
+          "end": 79.166,
+          "word": "culture",
+          "score": 0.52,
+          "start": 78.706
+        },
+        {
+          "end": 79.347,
+          "word": "And",
+          "score": 0.267,
+          "start": 79.266
+        },
+        {
+          "end": 80.087,
+          "word": "I'm",
+          "score": 0.353,
+          "start": 79.967
+        },
+        {
+          "end": 80.347,
+          "word": "like",
+          "score": 0.326,
+          "start": 80.107
+        },
+        {
+          "end": 80.487,
+          "word": "a",
+          "score": 0.535,
+          "start": 80.447
+        },
+        {
+          "end": 81.148,
+          "word": "kid",
+          "score": 0.754,
+          "start": 80.587
+        },
+        {
+          "end": 81.328,
+          "word": "in",
+          "score": 0.554,
+          "start": 81.228
+        },
+        {
+          "end": 81.488,
+          "word": "a",
+          "score": 0.775,
+          "start": 81.408
+        },
+        {
+          "end": 82.109,
+          "word": "tennis",
+          "score": 0.681,
+          "start": 81.548
+        },
+        {
+          "end": 82.769,
+          "word": "ball",
+          "score": 0.585,
+          "start": 82.289
+        },
+        {
+          "end": 83.63,
+          "word": "Playing",
+          "score": 0.708,
+          "start": 83.189
+        },
+        {
+          "end": 83.83,
+          "word": "you",
+          "score": 0.584,
+          "start": 83.67
+        },
+        {
+          "end": 84.15,
+          "word": "on",
+          "score": 0.73,
+          "start": 83.93
+        },
+        {
+          "end": 84.29,
+          "word": "the",
+          "score": 0.248,
+          "start": 84.19
+        },
+        {
+          "end": 84.791,
+          "word": "tennis",
+          "score": 0.516,
+          "start": 84.39
+        },
+        {
+          "end": 85.251,
+          "word": "ball",
+          "score": 0.726,
+          "start": 84.851
+        },
+        {
+          "end": 85.291,
+          "word": "I",
+          "score": 0,
+          "start": 85.271
+        },
+        {
+          "end": 85.591,
+          "word": "don't",
+          "score": 0.469,
+          "start": 85.331
+        },
+        {
+          "end": 85.851,
+          "word": "have",
+          "score": 0.42,
+          "start": 85.651
+        },
+        {
+          "end": 86.312,
+          "word": "balls",
+          "score": 0.507,
+          "start": 86.011
+        },
+        {
+          "end": 86.732,
+          "word": "yet",
+          "score": 0.818,
+          "start": 86.492
+        },
+        {
+          "end": 87.653,
+          "word": "I'm",
+          "score": 0.166,
+          "start": 87.573
+        },
+        {
+          "end": 87.873,
+          "word": "like",
+          "score": 0.146,
+          "start": 87.753
+        },
+        {
+          "end": 88.113,
+          "word": "a",
+          "score": 0.83,
+          "start": 87.993
+        },
+        {
+          "end": 88.633,
+          "word": "bull",
+          "score": 0.742,
+          "start": 88.193
+        },
+        {
+          "end": 88.894,
+          "word": "in",
+          "score": 0.779,
+          "start": 88.794
+        },
+        {
+          "end": 89.034,
+          "word": "a",
+          "score": 0.82,
+          "start": 88.994
+        },
+        {
+          "end": 89.734,
+          "word": "china",
+          "score": 0.706,
+          "start": 89.114
+        },
+        {
+          "end": 90.255,
+          "word": "shop",
+          "score": 0.768,
+          "start": 89.814
+        },
+        {
+          "end": 91.436,
+          "word": "Knocking",
+          "score": 0.617,
+          "start": 90.735
+        },
+        {
+          "end": 91.696,
+          "word": "on",
+          "score": 0.558,
+          "start": 91.596
+        },
+        {
+          "end": 91.876,
+          "word": "the",
+          "score": 0.403,
+          "start": 91.736
+        },
+        {
+          "end": 92.376,
+          "word": "knuckle",
+          "score": 0.482,
+          "start": 91.916
+        },
+        {
+          "end": 92.636,
+          "word": "Cause",
+          "score": 0.324,
+          "start": 92.456
+        },
+        {
+          "end": 92.817,
+          "word": "I",
+          "score": 0.532,
+          "start": 92.757
+        },
+        {
+          "end": 93.197,
+          "word": "got",
+          "score": 0.732,
+          "start": 92.877
+        },
+        {
+          "end": 93.617,
+          "word": "no",
+          "score": 0.778,
+          "start": 93.377
+        },
+        {
+          "end": 94.518,
+          "word": "culture",
+          "score": 0.633,
+          "start": 93.837
+        },
+        {
+          "end": 94.758,
+          "word": "I",
+          "score": 0.505,
+          "start": 94.638
+        },
+        {
+          "end": 95.078,
+          "word": "got",
+          "score": 0.656,
+          "start": 94.798
+        },
+        {
+          "end": 95.519,
+          "word": "no",
+          "score": 0.814,
+          "start": 95.258
+        },
+        {
+          "end": 96.159,
+          "word": "culture",
+          "score": 0.423,
+          "start": 95.719
+        },
+        {
+          "end": 96.419,
+          "word": "of",
+          "score": 0.685,
+          "start": 96.259
+        },
+        {
+          "end": 96.92,
+          "word": "mine",
+          "score": 0.482,
+          "start": 96.479
+        }
+      ]
+    },
+    {
+      "end": 102.079,
+      "text": " So give me that sleeping dog's eye.",
+      "start": 97.777,
+      "words": [
+        {
+          "end": 98.017,
+          "word": "So",
+          "score": 0.816,
+          "start": 97.777
+        },
+        {
+          "end": 98.297,
+          "word": "give",
+          "score": 0.624,
+          "start": 98.037
+        },
+        {
+          "end": 98.477,
+          "word": "me",
+          "score": 0.791,
+          "start": 98.317
+        },
+        {
+          "end": 98.898,
+          "word": "that",
+          "score": 0.553,
+          "start": 98.558
+        },
+        {
+          "end": 99.698,
+          "word": "sleeping",
+          "score": 0.711,
+          "start": 98.938
+        },
+        {
+          "end": 100.178,
+          "word": "dog's",
+          "score": 0.666,
+          "start": 99.778
+        },
+        {
+          "end": 101.139,
+          "word": "eye.",
+          "score": 0.516,
+          "start": 100.779
+        }
+      ]
+    },
+    {
+      "end": 105.561,
+      "text": "Cause everyone believes me when I say it's mine.",
+      "start": 102.079,
+      "words": [
+        {
+          "end": 102.32,
+          "word": "Cause",
+          "score": 0.413,
+          "start": 102.079
+        },
+        {
+          "end": 103.02,
+          "word": "everyone",
+          "score": 0.554,
+          "start": 102.44
+        },
+        {
+          "end": 103.5,
+          "word": "believes",
+          "score": 0.327,
+          "start": 103.04
+        },
+        {
+          "end": 103.76,
+          "word": "me",
+          "score": 0.713,
+          "start": 103.52
+        },
+        {
+          "end": 103.98,
+          "word": "when",
+          "score": 0.522,
+          "start": 103.8
+        },
+        {
+          "end": 104.181,
+          "word": "I",
+          "score": 0.794,
+          "start": 104.081
+        },
+        {
+          "end": 104.541,
+          "word": "say",
+          "score": 0.868,
+          "start": 104.201
+        },
+        {
+          "end": 104.821,
+          "word": "it's",
+          "score": 0.792,
+          "start": 104.641
+        },
+        {
+          "end": 105.421,
+          "word": "mine.",
+          "score": 0.852,
+          "start": 104.941
+        }
+      ]
+    },
+    {
+      "end": 109.624,
+      "text": "A little world over the eyes.",
+      "start": 105.561,
+      "words": [
+        {
+          "end": 105.661,
+          "word": "A",
+          "score": 0.752,
+          "start": 105.561
+        },
+        {
+          "end": 106.102,
+          "word": "little",
+          "score": 0.649,
+          "start": 105.721
+        },
+        {
+          "end": 106.362,
+          "word": "world",
+          "score": 0.326,
+          "start": 106.162
+        },
+        {
+          "end": 107.262,
+          "word": "over",
+          "score": 0.614,
+          "start": 106.642
+        },
+        {
+          "end": 107.743,
+          "word": "the",
+          "score": 0.74,
+          "start": 107.422
+        },
+        {
+          "end": 108.883,
+          "word": "eyes.",
+          "score": 0.777,
+          "start": 108.343
+        }
+      ]
+    },
+    {
+      "end": 113.205,
+      "text": "Cause everyone believes me when I say it's mine.",
+      "start": 109.624,
+      "words": [
+        {
+          "end": 109.884,
+          "word": "Cause",
+          "score": 0.398,
+          "start": 109.624
+        },
+        {
+          "end": 110.604,
+          "word": "everyone",
+          "score": 0.639,
+          "start": 110.004
+        },
+        {
+          "end": 111.064,
+          "word": "believes",
+          "score": 0.395,
+          "start": 110.624
+        },
+        {
+          "end": 111.304,
+          "word": "me",
+          "score": 0.706,
+          "start": 111.084
+        },
+        {
+          "end": 111.545,
+          "word": "when",
+          "score": 0.844,
+          "start": 111.364
+        },
+        {
+          "end": 111.725,
+          "word": "I",
+          "score": 0.838,
+          "start": 111.645
+        },
+        {
+          "end": 112.105,
+          "word": "say",
+          "score": 0.894,
+          "start": 111.765
+        },
+        {
+          "end": 112.385,
+          "word": "it's",
+          "score": 0.682,
+          "start": 112.205
+        },
+        {
+          "end": 112.945,
+          "word": "mine.",
+          "score": 0.37,
+          "start": 112.485
+        }
+      ]
+    },
+    {
+      "end": 117.208,
+      "text": "Give me that sleeping dog's eye.",
+      "start": 113.205,
+      "words": [
+        {
+          "end": 113.406,
+          "word": "Give",
+          "score": 0.524,
+          "start": 113.205
+        },
+        {
+          "end": 113.646,
+          "word": "me",
+          "score": 0.768,
+          "start": 113.446
+        },
+        {
+          "end": 114.026,
+          "word": "that",
+          "score": 0.685,
+          "start": 113.686
+        },
+        {
+          "end": 114.806,
+          "word": "sleeping",
+          "score": 0.645,
+          "start": 114.046
+        },
+        {
+          "end": 115.167,
+          "word": "dog's",
+          "score": 0.419,
+          "start": 114.866
+        },
+        {
+          "end": 116.287,
+          "word": "eye.",
+          "score": 0.263,
+          "start": 116.027
+        }
+      ]
+    },
+    {
+      "end": 123.631,
+      "text": "Cause everyone believes me when I say it's mine.",
+      "start": 117.208,
+      "words": [
+        {
+          "end": 117.428,
+          "word": "Cause",
+          "score": 0.316,
+          "start": 117.208
+        },
+        {
+          "end": 118.048,
+          "word": "everyone",
+          "score": 0.373,
+          "start": 117.568
+        },
+        {
+          "end": 118.588,
+          "word": "believes",
+          "score": 0.448,
+          "start": 118.148
+        },
+        {
+          "end": 118.829,
+          "word": "me",
+          "score": 0.818,
+          "start": 118.648
+        },
+        {
+          "end": 119.149,
+          "word": "when",
+          "score": 0.498,
+          "start": 118.869
+        },
+        {
+          "end": 121.61,
+          "word": "I",
+          "score": 0.897,
+          "start": 121.35
+        },
+        {
+          "end": 122.09,
+          "word": "say",
+          "score": 0.67,
+          "start": 121.69
+        },
+        {
+          "end": 122.611,
+          "word": "it's",
+          "score": 0.524,
+          "start": 122.33
+        },
+        {
+          "end": 123.211,
+          "word": "mine.",
+          "score": 0.574,
+          "start": 122.651
+        }
+      ]
+    },
+    {
+      "end": 124.552,
+      "text": "No culture.",
+      "start": 123.631,
+      "words": [
+        {
+          "end": 123.971,
+          "word": "No",
+          "score": 0.794,
+          "start": 123.631
+        },
+        {
+          "end": 124.452,
+          "word": "culture.",
+          "score": 0.336,
+          "start": 124.091
+        }
+      ]
+    },
+    {
+      "end": 125.372,
+      "text": "No culture.",
+      "start": 124.552,
+      "words": [
+        {
+          "end": 124.972,
+          "word": "No",
+          "score": 0.827,
+          "start": 124.552
+        },
+        {
+          "end": 125.352,
+          "word": "culture.",
+          "score": 0.249,
+          "start": 125.032
+        }
+      ]
+    },
+    {
+      "end": 126.753,
+      "text": "I got no culture.",
+      "start": 125.372,
+      "words": [
+        {
+          "end": 125.392,
+          "word": "I",
+          "score": 0,
+          "start": 125.372
+        },
+        {
+          "end": 125.692,
+          "word": "got",
+          "score": 0.544,
+          "start": 125.452
+        },
+        {
+          "end": 125.892,
+          "word": "no",
+          "score": 0.372,
+          "start": 125.752
+        },
+        {
+          "end": 126.753,
+          "word": "culture.",
+          "score": 0.588,
+          "start": 125.972
+        }
+      ]
+    },
+    {
+      "end": 131.178,
+      "text": " No culture, I got no culture.",
+      "start": 127.397,
+      "words": [
+        {
+          "end": 127.637,
+          "word": "No",
+          "score": 0.698,
+          "start": 127.397
+        },
+        {
+          "end": 128.357,
+          "word": "culture,",
+          "score": 0.49,
+          "start": 127.837
+        },
+        {
+          "end": 128.737,
+          "word": "I",
+          "score": 0.861,
+          "start": 128.477
+        },
+        {
+          "end": 129.138,
+          "word": "got",
+          "score": 0.729,
+          "start": 128.817
+        },
+        {
+          "end": 129.578,
+          "word": "no",
+          "score": 0.656,
+          "start": 129.258
+        },
+        {
+          "end": 130.518,
+          "word": "culture.",
+          "score": 0.636,
+          "start": 129.758
+        }
+      ]
+    },
+    {
+      "end": 134.719,
+      "text": "No culture, I got no culture.",
+      "start": 131.178,
+      "words": [
+        {
+          "end": 131.498,
+          "word": "No",
+          "score": 0.894,
+          "start": 131.178
+        },
+        {
+          "end": 132.138,
+          "word": "culture,",
+          "score": 0.577,
+          "start": 131.638
+        },
+        {
+          "end": 132.278,
+          "word": "I",
+          "score": 0.649,
+          "start": 132.198
+        },
+        {
+          "end": 132.499,
+          "word": "got",
+          "score": 0.617,
+          "start": 132.319
+        },
+        {
+          "end": 132.619,
+          "word": "no",
+          "score": 0.228,
+          "start": 132.539
+        },
+        {
+          "end": 133.379,
+          "word": "culture.",
+          "score": 0.564,
+          "start": 132.719
+        }
+      ]
+    },
+    {
+      "end": 141.181,
+      "text": "I'm like a kid in a gallery small, taking all the dope he's had I don't ask for.",
+      "start": 134.719,
+      "words": [
+        {
+          "end": 134.839,
+          "word": "I'm",
+          "score": 0.334,
+          "start": 134.719
+        },
+        {
+          "end": 135.139,
+          "word": "like",
+          "score": 0.554,
+          "start": 134.919
+        },
+        {
+          "end": 135.319,
+          "word": "a",
+          "score": 0.728,
+          "start": 135.239
+        },
+        {
+          "end": 135.72,
+          "word": "kid",
+          "score": 0.484,
+          "start": 135.379
+        },
+        {
+          "end": 136.12,
+          "word": "in",
+          "score": 0.702,
+          "start": 135.8
+        },
+        {
+          "end": 136.28,
+          "word": "a",
+          "score": 0.755,
+          "start": 136.2
+        },
+        {
+          "end": 136.98,
+          "word": "gallery",
+          "score": 0.674,
+          "start": 136.34
+        },
+        {
+          "end": 137.58,
+          "word": "small,",
+          "score": 0.66,
+          "start": 137
+        },
+        {
+          "end": 138.64,
+          "word": "taking",
+          "score": 0.52,
+          "start": 138
+        },
+        {
+          "end": 138.94,
+          "word": "all",
+          "score": 0.447,
+          "start": 138.82
+        },
+        {
+          "end": 139.121,
+          "word": "the",
+          "score": 0.333,
+          "start": 138.981
+        },
+        {
+          "end": 139.421,
+          "word": "dope",
+          "score": 0.431,
+          "start": 139.161
+        },
+        {
+          "end": 139.601,
+          "word": "he's",
+          "score": 0.426,
+          "start": 139.481
+        },
+        {
+          "end": 139.901,
+          "word": "had",
+          "score": 0.496,
+          "start": 139.661
+        },
+        {
+          "end": 140.081,
+          "word": "I",
+          "score": 0.65,
+          "start": 139.981
+        },
+        {
+          "end": 140.381,
+          "word": "don't",
+          "score": 0.562,
+          "start": 140.121
+        },
+        {
+          "end": 140.801,
+          "word": "ask",
+          "score": 0.487,
+          "start": 140.501
+        },
+        {
+          "end": 141.101,
+          "word": "for.",
+          "score": 0.677,
+          "start": 140.841
+        }
+      ]
+    },
+    {
+      "end": 147.183,
+      "text": "I'm like a ghost in a china shop, knocking on my door.",
+      "start": 141.181,
+      "words": [
+        {
+          "end": 141.261,
+          "word": "I'm",
+          "score": 0.216,
+          "start": 141.181
+        },
+        {
+          "end": 141.601,
+          "word": "like",
+          "score": 0.475,
+          "start": 141.301
+        },
+        {
+          "end": 142.382,
+          "word": "a",
+          "score": 0.558,
+          "start": 142.302
+        },
+        {
+          "end": 143.402,
+          "word": "ghost",
+          "score": 0.557,
+          "start": 142.962
+        },
+        {
+          "end": 143.682,
+          "word": "in",
+          "score": 0.809,
+          "start": 143.582
+        },
+        {
+          "end": 143.842,
+          "word": "a",
+          "score": 0.668,
+          "start": 143.762
+        },
+        {
+          "end": 145.002,
+          "word": "china",
+          "score": 0.764,
+          "start": 143.882
+        },
+        {
+          "end": 145.522,
+          "word": "shop,",
+          "score": 0.56,
+          "start": 145.302
+        },
+        {
+          "end": 146.263,
+          "word": "knocking",
+          "score": 0.567,
+          "start": 145.542
+        },
+        {
+          "end": 146.503,
+          "word": "on",
+          "score": 0.654,
+          "start": 146.383
+        },
+        {
+          "end": 146.683,
+          "word": "my",
+          "score": 0.589,
+          "start": 146.543
+        },
+        {
+          "end": 147.123,
+          "word": "door.",
+          "score": 0.45,
+          "start": 146.723
+        }
+      ]
+    },
+    {
+      "end": 149.424,
+      "text": "Yes, I got no culture.",
+      "start": 147.183,
+      "words": [
+        {
+          "end": 147.443,
+          "word": "Yes,",
+          "score": 0.719,
+          "start": 147.183
+        },
+        {
+          "end": 147.623,
+          "word": "I",
+          "score": 0.738,
+          "start": 147.543
+        },
+        {
+          "end": 147.963,
+          "word": "got",
+          "score": 0.662,
+          "start": 147.663
+        },
+        {
+          "end": 148.403,
+          "word": "no",
+          "score": 0.85,
+          "start": 148.163
+        },
+        {
+          "end": 149.124,
+          "word": "culture.",
+          "score": 0.547,
+          "start": 148.603
+        }
+      ]
+    },
+    {
+      "end": 151.284,
+      "text": "I got no culture.",
+      "start": 149.424,
+      "words": [
+        {
+          "end": 149.524,
+          "word": "I",
+          "score": 0.7,
+          "start": 149.424
+        },
+        {
+          "end": 149.864,
+          "word": "got",
+          "score": 0.676,
+          "start": 149.584
+        },
+        {
+          "end": 150.464,
+          "word": "no",
+          "score": 0.873,
+          "start": 150.064
+        },
+        {
+          "end": 151.144,
+          "word": "culture.",
+          "score": 0.659,
+          "start": 150.504
+        }
+      ]
+    },
+    {
+      "end": 153.725,
+      "text": "I got no culture of mine.",
+      "start": 151.284,
+      "words": [
+        {
+          "end": 151.404,
+          "word": "I",
+          "score": 0.696,
+          "start": 151.284
+        },
+        {
+          "end": 151.764,
+          "word": "got",
+          "score": 0.653,
+          "start": 151.464
+        },
+        {
+          "end": 152.184,
+          "word": "no",
+          "score": 0.867,
+          "start": 151.944
+        },
+        {
+          "end": 152.845,
+          "word": "culture",
+          "score": 0.612,
+          "start": 152.385
+        },
+        {
+          "end": 153.045,
+          "word": "of",
+          "score": 0.752,
+          "start": 152.945
+        },
+        {
+          "end": 153.725,
+          "word": "mine.",
+          "score": 0.956,
+          "start": 153.145
+        }
+      ]
+    },
+    {
+      "end": 162.538,
+      "text": " Let sleeping dogs lie.",
+      "start": 159.016,
+      "words": [
+        {
+          "end": 159.317,
+          "word": "Let",
+          "score": 0.743,
+          "start": 159.016
+        },
+        {
+          "end": 160.137,
+          "word": "sleeping",
+          "score": 0.711,
+          "start": 159.377
+        },
+        {
+          "end": 160.617,
+          "word": "dogs",
+          "score": 0.798,
+          "start": 160.237
+        },
+        {
+          "end": 161.738,
+          "word": "lie.",
+          "score": 0.6,
+          "start": 161.478
+        }
+      ]
+    },
+    {
+      "end": 165.94,
+      "text": "Cause everyone believes me when I say it's mine.",
+      "start": 162.538,
+      "words": [
+        {
+          "end": 162.818,
+          "word": "Cause",
+          "score": 0.435,
+          "start": 162.538
+        },
+        {
+          "end": 163.479,
+          "word": "everyone",
+          "score": 0.91,
+          "start": 162.918
+        },
+        {
+          "end": 163.959,
+          "word": "believes",
+          "score": 0.579,
+          "start": 163.539
+        },
+        {
+          "end": 164.179,
+          "word": "me",
+          "score": 0.632,
+          "start": 163.999
+        },
+        {
+          "end": 164.439,
+          "word": "when",
+          "score": 0.598,
+          "start": 164.219
+        },
+        {
+          "end": 164.699,
+          "word": "I",
+          "score": 0.517,
+          "start": 164.579
+        },
+        {
+          "end": 165.019,
+          "word": "say",
+          "score": 0.728,
+          "start": 164.719
+        },
+        {
+          "end": 165.26,
+          "word": "it's",
+          "score": 0.563,
+          "start": 165.119
+        },
+        {
+          "end": 165.78,
+          "word": "mine.",
+          "score": 0.673,
+          "start": 165.38
+        }
+      ]
+    },
+    {
+      "end": 170.102,
+      "text": "A little hole over the eyes.",
+      "start": 165.94,
+      "words": [
+        {
+          "end": 166.06,
+          "word": "A",
+          "score": 0.779,
+          "start": 165.94
+        },
+        {
+          "end": 166.82,
+          "word": "little",
+          "score": 0.6,
+          "start": 166.1
+        },
+        {
+          "end": 167.261,
+          "word": "hole",
+          "score": 0.515,
+          "start": 166.86
+        },
+        {
+          "end": 167.981,
+          "word": "over",
+          "score": 0.668,
+          "start": 167.401
+        },
+        {
+          "end": 168.161,
+          "word": "the",
+          "score": 0.857,
+          "start": 168.001
+        },
+        {
+          "end": 169.302,
+          "word": "eyes.",
+          "score": 0.538,
+          "start": 168.941
+        }
+      ]
+    },
+    {
+      "end": 174.144,
+      "text": "Cause everyone believes me when I say it's mine.",
+      "start": 170.102,
+      "words": [
+        {
+          "end": 170.382,
+          "word": "Cause",
+          "score": 0.515,
+          "start": 170.102
+        },
+        {
+          "end": 171.063,
+          "word": "everyone",
+          "score": 0.908,
+          "start": 170.482
+        },
+        {
+          "end": 171.523,
+          "word": "believes",
+          "score": 0.579,
+          "start": 171.103
+        },
+        {
+          "end": 171.763,
+          "word": "me",
+          "score": 0.644,
+          "start": 171.563
+        },
+        {
+          "end": 171.983,
+          "word": "when",
+          "score": 0.59,
+          "start": 171.803
+        },
+        {
+          "end": 172.243,
+          "word": "I",
+          "score": 0.618,
+          "start": 172.103
+        },
+        {
+          "end": 172.563,
+          "word": "say",
+          "score": 0.766,
+          "start": 172.283
+        },
+        {
+          "end": 173.084,
+          "word": "it's",
+          "score": 0.703,
+          "start": 172.683
+        },
+        {
+          "end": 174.084,
+          "word": "mine.",
+          "score": 0.694,
+          "start": 173.384
+        }
+      ]
+    },
+    {
+      "end": 177.006,
+      "text": "Let sleeping dogs lie.",
+      "start": 174.144,
+      "words": [
+        {
+          "end": 174.504,
+          "word": "Let",
+          "score": 0.806,
+          "start": 174.144
+        },
+        {
+          "end": 175.025,
+          "word": "sleeping",
+          "score": 0.514,
+          "start": 174.544
+        },
+        {
+          "end": 175.425,
+          "word": "dogs",
+          "score": 0.515,
+          "start": 175.145
+        },
+        {
+          "end": 175.905,
+          "word": "lie.",
+          "score": 0.824,
+          "start": 175.565
+        }
+      ]
+    },
+    {
+      "end": 180.727,
+      "text": "Cause everyone believes me when I say it's mine.",
+      "start": 177.006,
+      "words": [
+        {
+          "end": 177.906,
+          "word": "Cause",
+          "score": 0.481,
+          "start": 177.006
+        },
+        {
+          "end": 178.606,
+          "word": "everyone",
+          "score": 0.532,
+          "start": 178.066
+        },
+        {
+          "end": 179.087,
+          "word": "believes",
+          "score": 0.437,
+          "start": 178.646
+        },
+        {
+          "end": 179.327,
+          "word": "me",
+          "score": 0.758,
+          "start": 179.127
+        },
+        {
+          "end": 179.567,
+          "word": "when",
+          "score": 0.308,
+          "start": 179.387
+        },
+        {
+          "end": 179.807,
+          "word": "I",
+          "score": 0.56,
+          "start": 179.687
+        },
+        {
+          "end": 180.127,
+          "word": "say",
+          "score": 0.77,
+          "start": 179.847
+        },
+        {
+          "end": 180.347,
+          "word": "it's",
+          "score": 0.508,
+          "start": 180.227
+        },
+        {
+          "end": 180.627,
+          "word": "mine.",
+          "score": 0.504,
+          "start": 180.387
+        }
+      ]
+    },
+    {
+      "end": 182.909,
+      "text": "A little hole over the eyes.",
+      "start": 180.727,
+      "words": [
+        {
+          "end": 180.828,
+          "word": "A",
+          "score": 0.678,
+          "start": 180.727
+        },
+        {
+          "end": 181.588,
+          "word": "little",
+          "score": 0.638,
+          "start": 180.908
+        },
+        {
+          "end": 182.088,
+          "word": "hole",
+          "score": 0.634,
+          "start": 181.708
+        },
+        {
+          "end": 182.288,
+          "word": "over",
+          "score": 0.513,
+          "start": 182.108
+        },
+        {
+          "end": 182.408,
+          "word": "the",
+          "score": 0.257,
+          "start": 182.308
+        },
+        {
+          "end": 182.889,
+          "word": "eyes.",
+          "score": 0.374,
+          "start": 182.648
+        }
+      ]
+    },
+    {
+      "end": 187.131,
+      "text": "Cause everyone believes me when I say it's mine.",
+      "start": 182.909,
+      "words": [
+        {
+          "end": 183.289,
+          "word": "Cause",
+          "score": 0.603,
+          "start": 182.909
+        },
+        {
+          "end": 184.449,
+          "word": "everyone",
+          "score": 0.545,
+          "start": 183.949
+        },
+        {
+          "end": 185.25,
+          "word": "believes",
+          "score": 0.558,
+          "start": 184.529
+        },
+        {
+          "end": 185.41,
+          "word": "me",
+          "score": 0.57,
+          "start": 185.29
+        },
+        {
+          "end": 185.75,
+          "word": "when",
+          "score": 0.543,
+          "start": 185.51
+        },
+        {
+          "end": 185.85,
+          "word": "I",
+          "score": 0.538,
+          "start": 185.79
+        },
+        {
+          "end": 186.33,
+          "word": "say",
+          "score": 0.679,
+          "start": 185.87
+        },
+        {
+          "end": 186.691,
+          "word": "it's",
+          "score": 0.37,
+          "start": 186.51
+        },
+        {
+          "end": 187.131,
+          "word": "mine.",
+          "score": 0.348,
+          "start": 186.771
+        }
+      ]
+    },
+    {
+      "end": 209.76,
+      "text": " No culture, no culture No culture, no culture No culture, no culture No culture, no culture No culture, no culture No culture, no culture",
+      "start": 189.645,
+      "words": [
+        {
+          "end": 190.085,
+          "word": "No",
+          "score": 0.849,
+          "start": 189.645
+        },
+        {
+          "end": 191.046,
+          "word": "culture,",
+          "score": 0.501,
+          "start": 190.225
+        },
+        {
+          "end": 191.926,
+          "word": "no",
+          "score": 0.829,
+          "start": 191.606
+        },
+        {
+          "end": 193.327,
+          "word": "culture",
+          "score": 0.748,
+          "start": 192.106
+        },
+        {
+          "end": 193.768,
+          "word": "No",
+          "score": 0.796,
+          "start": 193.528
+        },
+        {
+          "end": 194.789,
+          "word": "culture,",
+          "score": 0.502,
+          "start": 193.988
+        },
+        {
+          "end": 195.709,
+          "word": "no",
+          "score": 0.804,
+          "start": 195.389
+        },
+        {
+          "end": 196.81,
+          "word": "culture",
+          "score": 0.694,
+          "start": 195.889
+        },
+        {
+          "end": 197.591,
+          "word": "No",
+          "score": 0.792,
+          "start": 197.311
+        },
+        {
+          "end": 198.532,
+          "word": "culture,",
+          "score": 0.544,
+          "start": 197.791
+        },
+        {
+          "end": 199.512,
+          "word": "no",
+          "score": 0.82,
+          "start": 199.192
+        },
+        {
+          "end": 200.953,
+          "word": "culture",
+          "score": 0.761,
+          "start": 199.612
+        },
+        {
+          "end": 201.414,
+          "word": "No",
+          "score": 0.808,
+          "start": 201.094
+        },
+        {
+          "end": 202.355,
+          "word": "culture,",
+          "score": 0.567,
+          "start": 201.454
+        },
+        {
+          "end": 203.335,
+          "word": "no",
+          "score": 0.663,
+          "start": 203.195
+        },
+        {
+          "end": 204.296,
+          "word": "culture",
+          "score": 0.705,
+          "start": 203.435
+        },
+        {
+          "end": 204.436,
+          "word": "No",
+          "score": 0.498,
+          "start": 204.316
+        },
+        {
+          "end": 204.897,
+          "word": "culture,",
+          "score": 0.366,
+          "start": 204.476
+        },
+        {
+          "end": 205.357,
+          "word": "no",
+          "score": 0.702,
+          "start": 205.017
+        },
+        {
+          "end": 206.398,
+          "word": "culture",
+          "score": 0.677,
+          "start": 205.437
+        },
+        {
+          "end": 207.298,
+          "word": "No",
+          "score": 0.746,
+          "start": 206.938
+        },
+        {
+          "end": 208.82,
+          "word": "culture,",
+          "score": 0.725,
+          "start": 207.379
+        },
+        {
+          "end": 209.3,
+          "word": "no",
+          "score": 0.825,
+          "start": 208.92
+        },
+        {
+          "end": 209.76,
+          "word": "culture",
+          "score": 0.434,
+          "start": 209.4
+        }
+      ]
+    }
+  ]

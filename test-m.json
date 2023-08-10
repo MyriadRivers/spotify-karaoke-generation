@@ -1,0 +1,36 @@
+{
+  "lyrics": {
+    "syncType": "LINE_SYNCED",
+    "lines": [
+      {
+        "startTimeMs": "0",
+        "words": "I missed you so, so, so, so bad.",
+        "syllables": [],
+        "endTimeMs": "0"
+      }, 
+      {
+        "startTimeMs": "20000",
+        "words": "And you should know that.",
+        "syllables": [],
+        "endTimeMs": "0"
+      }
+    ],
+    
+    "provider": "MusixMatch",
+    "providerLyricsId": "10595475",
+    "providerDisplayName": "Musixmatch",
+    "syncLyricsUri": "",
+    "isDenseTypeface": false,
+    "alternatives": [],
+    "language": "en",
+    "isRtlLanguage": false,
+    "fullscreenAction": "FULLSCREEN_LYRICS",
+    "showUpsell": false
+  },
+  "colors": {
+    "background": -1500124,
+    "text": -16777216,
+    "highlightText": -1
+  },
+  "hasVocalRemoval": false
+}
