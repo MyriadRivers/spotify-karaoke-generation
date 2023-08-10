@@ -307,38 +307,84 @@ whisper_lines = get_whisper_lines(whisper_words, musixmatch_lines)
 
 m_matches, w_matches = get_word_match_indices(musixmatch_lines, whisper_lines, musixmatch_words, whisper_words)
 
-m_gap_words = []
-w_gap_words = []
+m_gap_indices = []
+w_gap_indices = []
 
 prev_i = 0
 for i in range(len(m_matches)):
     # Assign time stamps for the perfectly matched words
     musixmatch_words[m_matches[i]] = whisper_words[w_matches[i]]
 
-    m_gap_words = [x for x in range(m_matches[prev_i] + 1, m_matches[i])]
-    w_gap_words = [x for x in range(w_matches[prev_i] + 1, w_matches[i])]
+    m_gap_indices = [x for x in range(m_matches[prev_i] + 1, m_matches[i])]
+    w_gap_indices = [x for x in range(w_matches[prev_i] + 1, w_matches[i])]
 
     # Assign time stamps for the gap words
-    if len(m_gap_words) != 0:
-        # # First assign all possible whisper timestamps
-        # m_i = 0
-        # m_syl = 0
-        # w_syl = 0
-        # for w_i in w_gap_words:
-        #     if m_syl == w_syl:
-        #         # musixmatch_words[m_gap_words[m_i]]["startTime"] = 
-        #         pass
+    if len(m_gap_indices) != 0:
+
+        m_syl = 0
+        w_syl = 0
+
+        m_syl_total = 0
+        m_syl_indices = []
+
+        w_syl_total = 0
+        w_syl_indices = []
+
+        for m_gap_i in m_gap_indices:
+            m_syl_indices.append(m_syl_total)
+            m_syl_total += count_syllables(musixmatch_words[m_gap_i]["word"])
+
+        for w_gap_i in w_gap_indices:
+            w_syl_indices.append(w_syl_total)
+            w_syl_total += count_syllables(whisper_words[w_gap_i]["word"])
+
+        # Generate a timestamp for every syllable possible in gap space
+
+        w_syl_timestamps = []
 
         m_gaps = []
         w_gaps = []
-        for index in m_gap_words:
-            m_gaps.append(musixmatch_words[index]["word"])
-        for index in w_gap_words:
-            w_gaps.append(whisper_words[index]["word"])
+        for index in m_gap_indices:
+            m_gaps.append(musixmatch_words[index])
+        for index in w_gap_indices:
+            w_gaps.append(whisper_words[index])
 
+        # Generate time stamps for whisper by breaking words up into syllables and linearly interpolating between words by syllables
+        for w_word in w_gaps:
+            w_word_syl_count = count_syllables(w_word["word"])
+
+            for syl_i in range(w_word_syl_count):
+                syl_start_time = (((w_word["endTime"] - w_word["startTime"]) / w_word_syl_count) * syl_i) + w_word["startTime"]
+                syl_end_time = (((w_word["endTime"] - w_word["startTime"]) / w_word_syl_count) * (syl_i + 1)) + w_word["startTime"]
+
+                w_syl_timestamps.append({"startTime": syl_start_time, "endTime": syl_end_time})
+
+        # TODO: Previous word border, might not exist if the gap is at front or end of song
+        if (len(m_gaps) > len(w_gaps)):
+            prev_border = whisper_words[w_matches[prev_i] + len(w_gap_indices)]["endTime"]
+            next_border = whisper_words[w_matches[i]]["startTime"]
+            
+            # Generate extra timestamps for syllables that go beyond how many words whisper has
+            for extra_i in range(m_syl_total - w_syl_total):
+                print("\nborders\n")
+                print(prev_border)
+                print(next_border)
+                print("\nsyl totals\n")
+                print(m_syl_total)
+                print(w_syl_total)
+                syl_start_time = (((next_border - prev_border) / (m_syl_total - w_syl_total)) * extra_i) + prev_border
+                syl_end_time = (((next_border - prev_border) / (m_syl_total - w_syl_total)) * (extra_i + 1)) + prev_border
+                w_syl_timestamps.append({"startTime": syl_start_time, "endTime": syl_end_time})
+
+        
         print()
-        print("m gap: " + str(m_gaps))
-        print("w gap: " + str(w_gaps))
+        print(w_syl_timestamps)
+        print(m_syl_total - w_syl_total)
+        print("m gap: " + str([m["word"] for m in m_gaps]))
+        print("w gap: " + str([w["word"] for w in w_gaps]))
+        print()
+        print(m_syl_indices)
+        print(w_syl_indices)
         print()
 
     prev_i = i
