@@ -278,6 +278,67 @@ def get_word_match_indices(m_lines, w_lines, m_words, w_words) -> (list[int], li
         
         # Match the start of whisper line to the start of musixmatch line if neither word is already matched
         if m_word_i - m_line_len not in matches_m and w_word_i - w_line_len not in matches_w:
+
+            # Alter the whisper words to break apart the first word of the line so that remaining syllables can still be matched
+            m_fir = musixmatch_words[m_word_i - m_line_len]
+            w_fir = whisper_words[w_word_i - w_line_len]
+
+            m_fir_syl = count_syllables(m_fir["word"])
+            w_fir_syl = count_syllables(w_fir["word"])
+
+            fir_syl_dif = m_fir_syl - w_fir_syl
+
+            # CASE 1: Whisper's first word has too many syllables
+            if fir_syl_dif < 0:
+                extra_syl = abs(fir_syl_dif)
+                pad_start = (((w_fir["endTime"] - w_fir["startTime"]) / w_fir_syl) * (w_fir_syl - extra_syl)) + w_fir["startTime"]
+                pad_word = {"word": "pad" * extra_syl, "startTime": pad_start, "endTime": w_fir["endTime"]}
+                whisper_words.insert(w_word_i - w_line_len + 1, pad_word)
+                
+                whisper_words[w_word_i - w_line_len]["endTime"] = pad_start
+
+                # We inserted a new pad word, so we need to adjust all the match indices by 1
+                matches_w = [(w + 1) for w in matches_w]
+
+            # CASE 2: Musixmatch's first word has too many syllables
+            elif fir_syl_dif > 0:
+                syl_i = 0
+                word_i = 0
+                w_indices_deleted = []
+
+                # Mark words that should be matched to the first musixmatch word for deletion
+
+                while syl_i < fir_syl_dif:
+                    w_word_index =  w_word_i - w_line_len + word_i + 1
+                    # Start counting from one after the first word
+                    syl = count_syllables(whisper_words[w_word_index]["word"])
+
+                    # If the word we're about to delete has extra syllables that go beyond the first musixmatch word's
+                    # We split it to only delete the ones matched to the musixmatch word
+                    if (syl_i + syl) > fir_syl_dif:
+                        extra_syl = (syl_i + syl) - fir_syl_dif
+                        in_syl = syl - extra_syl
+
+                        break_word = whisper_words[w_word_index]
+
+                        extra_start = (((break_word["endTime"] - break_word["startTime"]) / syl) * in_syl) + break_word["startTime"]
+                        extra_word = {"word": "pad" * extra_syl, "startTime": extra_start, "endTime": break_word["endTime"]}
+                        
+                        whisper_words.insert(w_word_index + 1, extra_word)
+                        matches_w = [(w + 1) for w in matches_w]
+
+                    w_indices_deleted.append(w_word_index)
+                    
+                    syl_i += syl
+                    word_i += 1
+                
+                # Delete them in reverse order to not throw off the indices
+                for index in sorted(w_indices_deleted, reverse=True):
+                    del whisper_words[index]
+
+                # Adjust matches by the number of words we deleted
+                matches_w = [(w - len(w_indices_deleted)) for w in matches_w]
+
             matches_m.insert(0, m_word_i - m_line_len)
             matches_w.insert(0, w_word_i - w_line_len)
 
@@ -287,8 +348,8 @@ def get_word_match_indices(m_lines, w_lines, m_words, w_words) -> (list[int], li
     return m_words_matches, w_words_matches
 
 # GET LYRICS FROM JSON FILES
-m_path = "call-m.json"
-w_path = "call-w.json"
+m_path = "test-gap-m.json"
+w_path = "test-gap-w.json"
 
 with open(m_path, "r") as m:
     mjson = m.read().rstrip()
@@ -317,6 +378,9 @@ for i in range(len(m_matches)):
 
     m_gap_indices = [x for x in range(m_matches[prev_i] + 1, m_matches[i])]
     w_gap_indices = [x for x in range(w_matches[prev_i] + 1, w_matches[i])]
+
+    print(m_gap_indices)
+    print(w_gap_indices)
 
     # Assign time stamps for the gap words
     if len(m_gap_indices) != 0:
@@ -360,6 +424,7 @@ for i in range(len(m_matches)):
                 w_syl_timestamps.append({"startTime": syl_start_time, "endTime": syl_end_time})
 
         # TODO: Previous word border, might not exist if the gap is at front or end of song
+        # TODO: Matching the first words together should only match the first syllable, extra w syllables belong to gap
         if (len(m_gaps) > len(w_gaps)):
             prev_border = whisper_words[w_matches[prev_i] + len(w_gap_indices)]["endTime"]
             next_border = whisper_words[w_matches[i]]["startTime"]
