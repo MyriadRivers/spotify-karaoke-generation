@@ -348,8 +348,8 @@ def get_word_match_indices(m_lines, w_lines, m_words, w_words) -> (list[int], li
     return m_words_matches, w_words_matches
 
 # GET LYRICS FROM JSON FILES
-m_path = "test-gap-m.json"
-w_path = "test-gap-w.json"
+m_path = "test-gap-m-2.json"
+w_path = "test-gap-w-2.json"
 
 with open(m_path, "r") as m:
     mjson = m.read().rstrip()
@@ -368,16 +368,23 @@ whisper_lines = get_whisper_lines(whisper_words, musixmatch_lines)
 
 m_matches, w_matches = get_word_match_indices(musixmatch_lines, whisper_lines, musixmatch_words, whisper_words)
 
+print("\nMatches M and W:\n")
+print(m_matches)
+print(w_matches)
+print()
+
 m_gap_indices = []
 w_gap_indices = []
 
 prev_i = 0
-for i in range(len(m_matches)):
+# + 1 in case the last match happens before the end of the lyrics, so we can check gap after the last match
+for i in range(len(m_matches) + 1):
     # Assign time stamps for the perfectly matched words
-    musixmatch_words[m_matches[i]] = whisper_words[w_matches[i]]
+    if i < len(m_matches):
+        musixmatch_words[m_matches[i]] = whisper_words[w_matches[i]]
 
-    m_gap_indices = [x for x in range(m_matches[prev_i] + 1, m_matches[i])]
-    w_gap_indices = [x for x in range(w_matches[prev_i] + 1, w_matches[i])]
+    m_gap_indices = [x for x in range(m_matches[prev_i] + 1, m_matches[i] if i < len(m_matches) else len(musixmatch_words))]
+    w_gap_indices = [x for x in range(w_matches[prev_i] + 1, w_matches[i] if i < len(w_matches) else len(whisper_words))]
 
     print(m_gap_indices)
     print(w_gap_indices)
@@ -424,10 +431,22 @@ for i in range(len(m_matches)):
                 w_syl_timestamps.append({"startTime": syl_start_time, "endTime": syl_end_time})
 
         # TODO: Previous word border, might not exist if the gap is at front or end of song
-        # TODO: Matching the first words together should only match the first syllable, extra w syllables belong to gap
+        # Check test-front-gap
         if (len(m_gaps) > len(w_gaps)):
-            prev_border = whisper_words[w_matches[prev_i] + len(w_gap_indices)]["endTime"]
-            next_border = whisper_words[w_matches[i]]["startTime"]
+            prev_border_i = w_matches[prev_i] + len(w_gap_indices)
+            next_border_i = w_matches[i] if i < len(w_matches) else w_matches[-1] + 1
+
+            # TODO make fall backs for gaps at start and end better
+
+            # Right now, in case the gap is at the start of musixmatch, 
+            # we just default the previous border to the start of the first detected word in either lyric file
+            prev_border = whisper_words[prev_border_i]["endTime"] if not (prev_border_i == 0 and next_border_i == 0) \
+                else min(musixmatch_words[0]["startTime"], whisper_words[0]["startTime"])
+            
+            # Right now, if gap is at the end of musixmatch and there are no more whisper words
+            # We just make the start of the next border the end of the last detected word
+            next_border = whisper_words[next_border_i]["startTime"] if next_border_i < len(whisper_words) \
+                else max(whisper_words[-1]["endTime"], musixmatch_data["lines"][-1]["startTimeMs"])
             
             # Generate extra timestamps for syllables that go beyond how many words whisper has
             for extra_i in range(m_syl_total - w_syl_total):
