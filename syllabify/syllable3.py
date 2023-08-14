@@ -348,7 +348,7 @@ def generate(word):
     if phoneme_list:
         return map(factory, [phoneme_list[0]])  # first version only
     else: 
-        print(word + ' not in CMU dictionary, sorry, please try again...')
+        # print(word + ' not in CMU dictionary, sorry, please try again...')
         return None
 
 

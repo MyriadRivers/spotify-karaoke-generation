@@ -60,13 +60,18 @@ def count_syllables(word: str) -> int:
     except TypeError:
         return guess_syllables(word)
     
-def get_musixmatch_lines_and_words(musixmatch_json) -> (list[list[dict]], list[dict]):
+def get_musixmatch_data(musixmatch_json) -> (list[list[dict]], list[dict], list[int]):
     """
     Return a list of lines for the musixmatch lyric data, where each line is a list of words.
     A word is a dict: {"word": str, "startTime": int, "endTime": int}
+    Also returns a list of all the musixmatch words not separated into lines.
+    Finally, returns the indices of those words that correspond with the start of the lines. 
     """
     m_lyrics = []
     m_words = []
+    m_line_indices = []
+
+    m_word_index = 0
 
     for line in musixmatch_json["lyrics"]["lines"]:
         # Incinerate everything in paretheses, these are typically polyphonic vocal lines
@@ -84,11 +89,16 @@ def get_musixmatch_lines_and_words(musixmatch_json) -> (list[list[dict]], list[d
 
             line_lyrics.append(word_data)
 
+            if i == 0:
+                m_line_indices.append(m_word_index)
+
+            m_word_index += 0
+
         if len(line["words"]) != 0:
             m_lyrics.append(line_lyrics)
             m_words.extend(line_lyrics)
 
-    return m_lyrics, m_words
+    return m_lyrics, m_words, m_line_indices
 
 def get_whisper_words(whisper_json) -> list[dict]:
     """
@@ -163,7 +173,7 @@ def get_whisper_lines(w_words, m_lines):
         l = ""
         for word in line:
             l += word["word"] + " "
-        print(l)
+        # print(l)
 
         w_lyrics.append(line)
 
@@ -355,8 +365,8 @@ def get_word_match_indices(m_lines, w_lines, m_words, w_words) -> (list[int], li
     return m_words_matches, w_words_matches
 
 # GET LYRICS FROM JSON FILES
-m_path = "test-gap-m-2.json"
-w_path = "test-gap-w-2.json"
+m_path = "call-m.json"
+w_path = "call-w.json"
 
 with open(m_path, "r") as m:
     mjson = m.read().rstrip()
@@ -367,18 +377,13 @@ with open(w_path, "r") as w:
 musixmatch_data = json.loads(mjson)
 whisper_data = json.loads(wjson)
 
-musixmatch_lines, musixmatch_words = get_musixmatch_lines_and_words(musixmatch_data)
+musixmatch_lines, musixmatch_words, musixmatch_line_indices = get_musixmatch_data(musixmatch_data)
 whisper_words = get_whisper_words(whisper_data)
 whisper_lines = get_whisper_lines(whisper_words, musixmatch_lines)
 
 # Match whisper words to musixmatch words similar to greatest common subsequence
 
 m_matches, w_matches = get_word_match_indices(musixmatch_lines, whisper_lines, musixmatch_words, whisper_words)
-
-print("\nMatches M and W:\n")
-print(m_matches)
-print(w_matches)
-print()
 
 m_gap_indices = []
 w_gap_indices = []
@@ -393,9 +398,6 @@ for i in range(len(m_matches) + 1):
 
     m_gap_indices = [x for x in range(m_matches[prev_i] + 1, m_matches[i] if i < len(m_matches) else len(musixmatch_words))]
     w_gap_indices = [x for x in range(w_matches[prev_i] + 1, w_matches[i] if i < len(w_matches) else len(whisper_words))]
-
-    print(m_gap_indices)
-    print(w_gap_indices)
 
     # Assign time stamps for the gap words
     if len(m_gap_indices) != 0:
@@ -412,17 +414,12 @@ for i in range(len(m_matches) + 1):
         for m_gap_i in m_gap_indices:
             m_syl_indices.append(m_syl_total)
             m_syl_total += count_syllables(musixmatch_words[m_gap_i]["word"])
-            print("\n adding " + str(count_syllables(musixmatch_words[m_gap_i]["word"])) + " to m syl for word '" + musixmatch_words[m_gap_i]["word"] + "'")
 
         for w_gap_i in w_gap_indices:
             w_syl_indices.append(w_syl_total)
             w_syl_total += count_syllables(whisper_words[w_gap_i]["word"])
-            print("\n adding " + str(count_syllables(whisper_words[w_gap_i]["word"])) + " to w syl for word '" + whisper_words[w_gap_i]["word"] + "'")
 
         # Generate a timestamp for every syllable possible in gap space
-        print("\nTOTALS")
-        print(m_syl_total)
-        print(w_syl_total)
 
         w_syl_timestamps = []
 
@@ -448,8 +445,6 @@ for i in range(len(m_matches) + 1):
             prev_border_i = w_matches[prev_i] + len(w_gap_indices)
             next_border_i = w_matches[i] if i < len(w_matches) else len(whisper_words)
 
-            print("next border index is: " + str(next_border_i))
-
             # If the first musixmatch words are unmatched, we guess where the start the start of the line is
             # by taking the first detected whisper word - the length of the first word * the number of missing words
             # This cannot be earlier that 0, the start of the song
@@ -468,42 +463,19 @@ for i in range(len(m_matches) + 1):
                 else max(whisper_words[-1]["endTime"] + w_last_syl_length * (m_syl_total - w_syl_total), 
                          int(musixmatch_data["lyrics"]["lines"][-1]["startTimeMs"]))
             
-            print("first conditional for next border: " + str(next_border_i < len(whisper_words)))
-            
             # Generate extra timestamps for syllables that go beyond how many words whisper has
             for extra_i in range(m_syl_total - w_syl_total):
-                print("\nborders\n")
-                print(prev_border)
-                print(next_border)
-                print("\nsyl totals\n")
-                print(m_syl_total)
-                print(w_syl_total)
+
                 syl_start_time = (((next_border - prev_border) / (m_syl_total - w_syl_total)) * extra_i) + prev_border
                 syl_end_time = (((next_border - prev_border) / (m_syl_total - w_syl_total)) * (extra_i + 1)) + prev_border
 
                 w_syl_timestamps.append({"startTime": syl_start_time, "endTime": syl_end_time})
-
-        
-        print()
-        print(w_syl_timestamps)
-        print(m_syl_total - w_syl_total)
-        print("m gap: " + str([m["word"] for m in m_gaps]))
-        print("w gap: " + str([w["word"] for w in w_gaps]))
-        print()
-        print(m_gap_indices)
-        print(m_syl_indices)
-        print(w_syl_indices)
-        print()
-
-        print("\nunmatched~\n")
-        print(musixmatch_words)
 
         # Assign timestamps to the unmatched musixmatch words from whisperwords by syllable count
         for syl_i, gap_i in enumerate(m_gap_indices):
             musixmatch_words[gap_i]["startTime"] = w_syl_timestamps[syl_i]["startTime"]
             musixmatch_words[gap_i]["endTime"] = w_syl_timestamps[syl_i]["endTime"]
 
-        print("\nmatched!!\n")
-        print(musixmatch_words)
-
     prev_i = i
+
+# Now, break the words back into lines
