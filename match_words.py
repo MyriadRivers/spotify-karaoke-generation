@@ -647,4 +647,4 @@ def get_karaoke_lines(m_path: str, w_path: str) -> list[list[dict]]:
     return karaoke_lines
 
 
-# print(get_karaoke_lines("test-front-gap-m.json", "test-front-gap-w.json"))
+# print(get_karaoke_lines("no-culture-syrics.json", "no-culture-whisper.json"))
