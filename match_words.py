@@ -183,191 +183,6 @@ def get_lines(word_list, index_list):
 
     return lines
 
-def get_word_match_indices(m_lines, w_lines, m_words, w_words) -> (list[int], list[int]):
-    line_count = len(m_lines)
-    m_word_i = 0
-    w_word_i = 0
-    
-    m_words_matches = []
-    w_words_matches = []
-
-    for line_i in range(line_count):
-
-        m_line_len = len(m_lines[line_i])
-        w_line_len = len(w_lines[line_i])
-
-        # Initialize the array with leading row and column of zeroes
-        default_match = {"matches": 0, "m_i": None, "w_i": None, "syl_dif": 999}
-        match_arr = [[default_match] * (w_line_len + 1)] + [[default_match] + [None] * w_line_len for _ in range(m_line_len)]
-        
-        m_syl_i = 0   
-
-        for m_i, m_word in enumerate(m_lines[line_i], 1):
-            m_syl = count_syllables(m_word["word"])
-            w_syl_i = 0 
-
-            for w_i, w_word in enumerate(w_lines[line_i], 1):
-                w_syl = count_syllables(w_word["word"])
-
-                prev_m = match_arr[m_i - 1][w_i]
-                prev_w = match_arr[m_i][w_i - 1]
-
-                if not match(m_word["word"], w_word["word"]):
-                    if prev_m["matches"] > prev_w["matches"]:
-                        match_arr[m_i][w_i] = prev_m
-                    elif prev_m["matches"] < prev_w["matches"]:
-                        match_arr[m_i][w_i] = prev_w
-                    else:
-                        match_arr[m_i][w_i] = prev_m if prev_m["syl_dif"] < prev_w["syl_dif"] else prev_w
-                else:
-                    matches = match_arr[m_i - 1][w_i - 1]["matches"] + 1
-                    syl_dif = abs(m_syl_i - w_syl_i)
-
-                    if matches == prev_m["matches"] and syl_dif >= prev_m["syl_dif"]:
-                        match_arr[m_i][w_i] = prev_m
-                    elif matches == prev_w["matches"] and syl_dif >= prev_w["syl_dif"]:
-                        match_arr[m_i][w_i] = prev_w
-                    else:
-                        # set to m_i - 1 and w_i - 1 to account for the row/column indices starting at 1
-                        total_m_i = m_word_i
-                        total_w_i = w_i - 1 + w_word_i
-                        match_arr[m_i][w_i] = {"matches": matches, "m_i": total_m_i, "w_i": total_w_i, "syl_dif": syl_dif}
-    
-                w_syl_i += w_syl
-
-            m_syl_i += m_syl
-            m_word_i += 1
-
-        w_word_i += w_line_len
-
-        # Debug the matches array
-        # print()
-        # debug_arr = []
-        # for j in range(len(match_arr[0])):
-        #     debug_line = []
-        #     for i, l in enumerate(match_arr):
-        #         debug_line.append([l[j]["matches"], (l[j]["m_i"], l[j]["w_i"]), l[j]["syl_dif"]])
-        #     print(debug_line)
-        #     debug_arr.append(debug_line)
-
-        # Trace backwards to get the optimal matches
-        matches_m = []
-        matches_w = []
-
-        trace_m_i = len(m_lines[line_i])
-        trace_w_i = len(w_lines[line_i])
-        trace_curr = match_arr[trace_m_i][trace_w_i]
-
-        while (trace_curr["m_i"] != None or trace_curr["w_i"] != None) and trace_m_i >= 0 and trace_w_i >= 0:
-            trace_prev_m = match_arr[trace_m_i - 1][trace_w_i]
-            trace_prev_w = match_arr[trace_m_i][trace_w_i - 1]
-
-            if match(m_words[trace_m_i + m_word_i - m_line_len - 1]["word"], \
-                    w_words[trace_w_i + w_word_i - w_line_len - 1]["word"]):
-                
-                matches = match_arr[trace_m_i][trace_w_i]["matches"]
-                syl_dif = match_arr[trace_m_i][trace_w_i]["syl_dif"]
-                
-                if matches == trace_prev_m["matches"] and syl_dif >= trace_prev_m["syl_dif"]:
-                    trace_m_i -= 1
-                elif matches == trace_prev_w["matches"] and syl_dif >= trace_prev_w["syl_dif"]:
-                    trace_w_i -= 1
-                else:
-                    matches_m.insert(0, trace_curr["m_i"])
-                    matches_w.insert(0, trace_curr["w_i"])
-                    trace_m_i -= 1
-                    trace_w_i -= 1
-            else:
-                if trace_prev_m["matches"] > trace_prev_w["matches"]:
-                    trace_m_i -= 1
-                elif trace_prev_m["matches"] < trace_prev_w["matches"]:
-                    trace_w_i -= 1
-                else:
-                    if (trace_prev_m["m_i"] != None and trace_prev_w["m_i"] == None) or trace_prev_m["syl_dif"] < trace_prev_w["syl_dif"]:
-                        trace_m_i -= 1
-                    elif (trace_prev_w["m_i"] != None and trace_prev_m["m_i"] == None) or trace_prev_m["syl_dif"] >= trace_prev_w["syl_dif"]:
-                        trace_w_i -= 1
-
-            trace_curr = match_arr[trace_m_i][trace_w_i]
-        
-        # Match the start of whisper line to the start of musixmatch line if neither word is already matched
-        if m_word_i - m_line_len not in matches_m and w_word_i - w_line_len not in matches_w:
-
-            # Alter the whisper words to break apart the first word of the line so that remaining syllables can still be matched
-            m_fir = musixmatch_words[m_word_i - m_line_len]
-            w_fir = whisper_words[w_word_i - w_line_len]
-
-            m_fir_syl = count_syllables(m_fir["word"])
-            w_fir_syl = count_syllables(w_fir["word"])
-
-            fir_syl_dif = m_fir_syl - w_fir_syl
-
-            # CASE 1: Whisper's first word has too many syllables
-            if fir_syl_dif < 0:
-                extra_syl = abs(fir_syl_dif)
-
-                # Add a new padword from the remains of the first whisper word
-                pad_start = (((w_fir["endTime"] - w_fir["startTime"]) / w_fir_syl) * (w_fir_syl - extra_syl)) + w_fir["startTime"]
-                pad_word = {"word": "pad" * extra_syl, "startTime": pad_start, "endTime": w_fir["endTime"]}
-                whisper_words.insert(w_word_i - w_line_len + 1, pad_word)
-                
-                # Change end time of first word since we cut it
-                whisper_words[w_word_i - w_line_len]["endTime"] = pad_start
-
-                # We inserted a new pad word, so we need to adjust all the match indices by 1
-                matches_w = [(w + 1) for w in matches_w]
-
-            # CASE 2: Musixmatch's first word has too many syllables
-            elif fir_syl_dif > 0:
-                syl_i = 0
-                word_i = 0
-                w_indices_deleted = []
-
-                # Mark words that should be matched to the first musixmatch word for deletion
-
-                while syl_i < fir_syl_dif:
-                    w_word_index =  w_word_i - w_line_len + word_i + 1
-                    # Start counting from one after the first word
-                    syl = count_syllables(whisper_words[w_word_index]["word"])
-
-                    # If the word we're about to delete has extra syllables that go beyond the first musixmatch word's
-                    # We split it to only delete the ones matched to the musixmatch word
-                    if (syl_i + syl) > fir_syl_dif:
-                        extra_syl = (syl_i + syl) - fir_syl_dif
-                        in_syl = syl - extra_syl
-
-                        break_word = whisper_words[w_word_index]
-
-                        extra_start = (((break_word["endTime"] - break_word["startTime"]) / syl) * in_syl) + break_word["startTime"]
-                        extra_word = {"word": "pad" * extra_syl, "startTime": extra_start, "endTime": break_word["endTime"]}
-                        
-                        # Adjust the first word to end where the pad begins since we deleted a bunch between them
-                        whisper_words[w_word_i - w_line_len]["endTime"] = extra_start
-
-                        whisper_words.insert(w_word_index + 1, extra_word)
-                        matches_w = [(w + 1) for w in matches_w]
-
-                    # This should only ever have one element, as only one word can be split on the musixmatch syllable border
-                    w_indices_deleted.append(w_word_index)
-                    
-                    syl_i += syl
-                    word_i += 1
-                
-                # Delete them in reverse order to not throw off the indices
-                for index in sorted(w_indices_deleted, reverse=True):
-                    del whisper_words[index]
-
-                # Adjust matches by the number of words we deleted
-                matches_w = [(w - len(w_indices_deleted)) for w in matches_w]
-
-            matches_m.insert(0, m_word_i - m_line_len)
-            matches_w.insert(0, w_word_i - w_line_len)
-
-        m_words_matches.extend(matches_m)
-        w_words_matches.extend(matches_w)
-
-    return m_words_matches, w_words_matches
-
 """Public Method"""
 def get_karaoke_lines(m_path: str, w_path: str) -> list[list[dict]]:
     """Time stamp the start and end of every word in a song, grouped by lines, for karaoke playback.
@@ -489,7 +304,6 @@ def get_karaoke_lines(m_path: str, w_path: str) -> list[list[dict]]:
             
             # Match the start of whisper line to the start of musixmatch line if neither word is already matched
             if m_word_i - m_line_len not in matches_m and w_word_i - w_line_len not in matches_w:
-
                 # Alter the whisper words to break apart the first word of the line so that remaining syllables can still be matched
                 m_fir = musixmatch_words[m_word_i - m_line_len]
                 w_fir = whisper_words[w_word_i - w_line_len]
@@ -595,10 +409,13 @@ def get_karaoke_lines(m_path: str, w_path: str) -> list[list[dict]]:
             musixmatch_words[m_matches[i]]["startTime"] = whisper_words[w_matches[i]]["startTime"]
             musixmatch_words[m_matches[i]]["endTime"] = whisper_words[w_matches[i]]["endTime"]
 
-        m_gap_indices = [x for x in range(m_matches[prev_i] + 1, m_matches[i] if i < len(m_matches) else len(musixmatch_words))]
-        w_gap_indices = [x for x in range(w_matches[prev_i] + 1, w_matches[i] if i < len(w_matches) else len(whisper_words))]
+        m_gap_indices = [x for x in range(m_matches[prev_i] + 1 if not (prev_i == 0 and i == 0) else 0, 
+                                          m_matches[i] if i < len(m_matches) else len(musixmatch_words))]
+        w_gap_indices = [x for x in range(w_matches[prev_i] + 1 if not (prev_i == 0 and i == 0) else 0, 
+                                          w_matches[i] if i < len(w_matches) else len(whisper_words))]
 
         # Assign time stamps for the gap words
+
         if len(m_gap_indices) != 0:
 
             m_syl = 0
@@ -645,7 +462,7 @@ def get_karaoke_lines(m_path: str, w_path: str) -> list[list[dict]]:
                 next_border_i = w_matches[i] if i < len(w_matches) else len(whisper_words)
 
                 # If the first musixmatch words are unmatched, we guess where the start the start of the line is
-                # by taking the first detected whisper word - the length of the first word * the number of missing words
+                # by taking the first detected whisper word - (the length of the first word * the number of missing words)
                 # This cannot be earlier that 0, the start of the song
                 w_first_syl = count_syllables(whisper_words[0]["word"])
                 w_last_syl = count_syllables(whisper_words[-1]["word"])
@@ -664,7 +481,6 @@ def get_karaoke_lines(m_path: str, w_path: str) -> list[list[dict]]:
                 
                 # Generate extra timestamps for syllables that go beyond how many words whisper has
                 for extra_i in range(m_syl_total - w_syl_total):
-
                     syl_start_time = (((next_border - prev_border) / (m_syl_total - w_syl_total)) * extra_i) + prev_border
                     syl_end_time = (((next_border - prev_border) / (m_syl_total - w_syl_total)) * (extra_i + 1)) + prev_border
 
@@ -694,3 +510,5 @@ def get_karaoke_lines(m_path: str, w_path: str) -> list[list[dict]]:
     #     print(k_line_string)
 
     return karaoke_lines
+
+# print(get_karaoke_lines("test-front-gap-m.json", "test-front-gap-w.json"))
