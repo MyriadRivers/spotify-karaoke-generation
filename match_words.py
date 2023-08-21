@@ -222,6 +222,11 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
         Word: {"word": <word>, "startTime": <start time of word in ms>, "endTime": <end time of word in ms>}.
     """
 
+    karaoke_path = os.path.join(lyrics_dir, "karaoke.json")
+    if os.path.exists(karaoke_path):
+        print("Word-level timestamped lyrics json already exists. Returning path.")
+        return karaoke_path
+
     def get_word_match_indices(
         m_lines, w_lines, m_words, w_words
     ) -> (list[int], list[int]):
@@ -646,9 +651,9 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
 
     #     print(k_line_string)
 
-    karaoke_path = os.path.join(lyrics_dir, "karaoke.json")
     with open(karaoke_path, 'w') as f:
         json.dump(karaoke_lines, f)
+        print("Writing word-level timestamped lyrics json to " + karaoke_path)
 
     return karaoke_path
 

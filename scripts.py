@@ -32,6 +32,13 @@ def download_and_split(
     title = re.sub(alphanumeric, "", title)
     title = re.sub(white_space, "-", title)
 
+    vocals_path = os.path.join(spleeter_dir, title, "vocals.wav")
+    accompaniment_path = os.path.join(spleeter_dir, title, "accompaniment.wav")
+
+    if os.path.exists(vocals_path) and os.path.exists(accompaniment_path):
+        print("Spleeter stem files already exist. Returning path.")
+        return vocals_path, accompaniment_path
+
     s = Search(title)
     for video in s.results:
         # Search YouTube for first result matching search query that has a duration
@@ -39,26 +46,39 @@ def download_and_split(
         if abs(video.length - length) < MAX_TIME_DIF:
             streams = video.streams.filter(only_audio=True)
 
-            song_path = streams[0].download(pytube_dir, title)
+            song_path = os.path.join(pytube_dir, title)
+
+            if not os.path.exists(song_path):
+                print("Downloading to " + song_path)
+                song_path = streams[0].download(pytube_dir, title)
 
             separator.separate_to_file(song_path, spleeter_dir)
-
-            vocals_path = os.path.join(spleeter_dir, title, "vocals.wav")
-            accompaniment_path = os.path.join(spleeter_dir, title, "accompaniment.wav")
 
             return vocals_path, accompaniment_path
 
 def get_musixmatch(track_id: str, lyrics_dir: str):
+    musixmatch_path = os.path.join(lyrics_dir, "musixmatch.json")
+
+    if os.path.exists(musixmatch_path):
+        print("Musixmatch lyrics json already exists. Returning path.")
+        return musixmatch_path
+
     res = requests.get(f"https://spotify-lyric-api.herokuapp.com/?trackid={track_id}")
     musixmatch_lyrics = res.json()
 
-    musixmatch_path = os.path.join(lyrics_dir, "musixmatch.json")
     with open(musixmatch_path, 'w') as f:
         json.dump(musixmatch_lyrics, f)
+        print("Writing musixmatch lyrics json to " + musixmatch_path)
 
     return musixmatch_path
 
 def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
+    whisper_path = os.path.join(lyrics_dir, "whisper.json")
+
+    if os.path.exists(whisper_path):
+        print("Whisper transcription json already exists. Returning path.")
+        return whisper_path
+
     device = "cuda"
     batch_size = 16  # reduce if low on GPU mem
     compute_type = "float16"  # change to "int8" if low on GPU mem (may reduce accuracy)
@@ -91,9 +111,9 @@ def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
         result["segments"], model_a, metadata, audio, device, return_char_alignments=False
     )
 
-    whisper_path = os.path.join(lyrics_dir, "whisper.json")
     with open(whisper_path, 'w') as f:
         json.dump(result["segments"], f)
+        print("Writing whisper transcription json to " + whisper_path)
 
     return whisper_path
 
