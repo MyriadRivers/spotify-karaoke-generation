@@ -1,30 +1,23 @@
 import re
 import os
 import whisperx
-import gc
+import json
+import torch
+import requests
+from pathlib import Path
 
-from syrics.api import Spotify
 from pytube import Search
 from spleeter.separator import Separator
 
-sp_dc = "AQCprFCayO6iKRQNux_3-4Gx8fNvLpJsRtlXzv1S9bAbzlD1plAKF4rZBsxEqX5EsqC1uHtR6nS5wTa80x6f-OfkbKgPqtegROZTERRm_KUubMqWjWinS3ilkVfO4WPMpJlLdWnjVwlijUTVM9j9-nKurM9FY9Kb"
-
-sp = Spotify(sp_dc)
-
 separator = Separator("spleeter:2stems")
-
-
-def get_musixmatch(track_id: str):
-    return sp.get_lyrics(track_id)
-
 
 def download_and_split(
     name: str,
     artists: list[str],
     length: int,
-    AUDIO_DIR: str,
-    STEMS_DIR: str,
-    MAX_TIME_DIF: int = 2,
+    pytube_dir: str,
+    spleeter_dir: str,
+    MAX_TIME_DIF: int = 2
 ) -> (str, str):
     """Downloads a song from YouTube and splits into 2 stems. Returns path to vocals and accompaniment audio files."""
     # Create search query for song by combining artists' and song's names
@@ -46,40 +39,62 @@ def download_and_split(
         if abs(video.length - length) < MAX_TIME_DIF:
             streams = video.streams.filter(only_audio=True)
 
-            song_path = streams[0].download(AUDIO_DIR, title)
+            song_path = streams[0].download(pytube_dir, title)
 
-            separator.separate_to_file(song_path, STEMS_DIR)
+            separator.separate_to_file(song_path, spleeter_dir)
 
-            vocals_path = os.path.join(STEMS_DIR, title, "vocals.wav")
-            accompaniment_path = os.path.join(STEMS_DIR, title, "accompaniment.wav")
+            vocals_path = os.path.join(spleeter_dir, title, "vocals.wav")
+            accompaniment_path = os.path.join(spleeter_dir, title, "accompaniment.wav")
+
             return vocals_path, accompaniment_path
 
+def get_musixmatch(track_id: str, lyrics_dir: str):
+    res = requests.get(f"https://spotify-lyric-api.herokuapp.com/?trackid={track_id}")
+    musixmatch_lyrics = res.json()
 
-# TODO: Change device to CPU if no gpu detected with pytorch, also change model size to fit available ram
-# Put everything in a function
+    musixmatch_path = os.path.join(lyrics_dir, "musixmatch.json")
+    with open(musixmatch_path, 'w') as f:
+        json.dump(musixmatch_lyrics, f)
 
-device = "cuda"
-audio_file = "vocals.webm"
-batch_size = 16  # reduce if low on GPU mem
-compute_type = "float16"  # change to "int8" if low on GPU mem (may reduce accuracy)
+    return musixmatch_path
 
-# 1. Transcribe with original whisper (batched)
-model = whisperx.load_model(
-    "large-v2", device, compute_type=compute_type, language="en"
-)
+def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
+    device = "cuda"
+    batch_size = 16  # reduce if low on GPU mem
+    compute_type = "float16"  # change to "int8" if low on GPU mem (may reduce accuracy)
+    size = "large-v2"
 
-audio = whisperx.load_audio(audio_file)
-result = model.transcribe(audio, batch_size=batch_size, language="en")
+    # Default to CPU if no compatible GPU detected
+    if not torch.cuda.is_available():
+        device = "cpu"
+        print("No CUDA device detected. Running on CPU!")
+        compute_type = "int8"
+        size = "medium"
 
-print(result["segments"])  # before alignment
+    # 1. Transcribe with original whisper (batched)file:///home/jason/Downloads/call-me-maybe.mp3
 
-# delete model if low on GPU resources
-# import gc; gc.collect(); torch.cuda.empty_cache(); del model
+    model = whisperx.load_model(
+        size, device, compute_type=compute_type, language="en"
+    )
 
-# 2. Align whisper output
-model_a, metadata = whisperx.load_align_model(language_code="en", device=device)
-result = whisperx.align(
-    result["segments"], model_a, metadata, audio, device, return_char_alignments=False
-)
+    audio = whisperx.load_audio(speech_audio_file)
+    result = model.transcribe(audio, batch_size=batch_size, language="en")
 
-print(result["segments"])  # after alignment
+    # delete model if low on GPU resources
+    # gc.collect()
+    # torch.cuda.empty_cache()
+    # del model
+
+    # 2. Align whisper output
+    model_a, metadata = whisperx.load_align_model(language_code="en", device=device)
+    result = whisperx.align(
+        result["segments"], model_a, metadata, audio, device, return_char_alignments=False
+    )
+
+    whisper_path = os.path.join(lyrics_dir, "whisper.json")
+    with open(whisper_path, 'w') as f:
+        json.dump(result["segments"], f)
+
+    return whisper_path
+
+# get_musixmatch("3TGRqZ0a2l1LRblBkJoaDx")

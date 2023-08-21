@@ -1,6 +1,7 @@
 import json
 import re
 from syllabify.syllable3 import generate
+import os
 
 
 def match(word1: str, word2: str) -> bool:
@@ -78,7 +79,7 @@ def get_musixmatch_data(musixmatch_json) -> (list[list[dict]], list[dict], list[
 
     m_word_index = 0
 
-    for line in musixmatch_json["lyrics"]["lines"]:
+    for line in musixmatch_json["lines"]:
         # Incinerate everything in paretheses, these are typically polyphonic vocal lines
         line["words"] = re.sub(r"\(.*?\)", "", line["words"])
         line["words"] = re.sub(r"\(+", "", line["words"])
@@ -208,7 +209,7 @@ def get_lines(word_list, index_list):
 """Public Method"""
 
 
-def get_karaoke_lines(m_path: str, w_path: str) -> list[list[dict]]:
+def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
     """Time stamp the start and end of every word in a song, grouped by lines, for karaoke playback.
 
     Args:
@@ -216,7 +217,8 @@ def get_karaoke_lines(m_path: str, w_path: str) -> list[list[dict]]:
         w_path: file path of the Whisper json data file of the audio transcription.
 
     Returns:
-        List of lines corresponding to the lines of the song from Musixmatch, where each line is a list of words.
+        Path to json file containin lyrics, which are a list of lines.
+        List of lines correspond to the lines of the song from Musixmatch, where each line is a list of words.
         Word: {"word": <word>, "startTime": <start time of word in ms>, "endTime": <end time of word in ms>}.
     """
 
@@ -644,7 +646,10 @@ def get_karaoke_lines(m_path: str, w_path: str) -> list[list[dict]]:
 
     #     print(k_line_string)
 
-    return karaoke_lines
+    karaoke_path = os.path.join(lyrics_dir, "karaoke.json")
+    with open(karaoke_path, 'w') as f:
+        json.dump(karaoke_lines, f)
 
+    return karaoke_path
 
 # print(get_karaoke_lines("no-culture-syrics.json", "no-culture-whisper.json"))
