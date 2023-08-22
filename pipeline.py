@@ -38,7 +38,7 @@ def get_karaoke(name: str,
 
     lyrics_json = get_karaoke_lines(musixmatch, whisper, lyrics_dir)
 
-    return lyrics_json, karaoke_track
+    return {"lyrics": lyrics_json, "karaoke": karaoke_track}
 
-get_karaoke(args.song, args.artists, args.duration, args.id, args.output)
+print(get_karaoke(args.song, args.artists, args.duration, args.id, args.output))
     
