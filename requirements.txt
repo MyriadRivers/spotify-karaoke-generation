@@ -1,7 +1,7 @@
 nltk==3.8.1
 pytube==15.0.0
+Requests==2.31.0
 spleeter==2.4.0
-syrics==0.0.1.8
 torch==2.0.1+cu118
 whisperx==3.1.1
 protobuf==3.20.*
