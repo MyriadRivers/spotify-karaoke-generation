@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 import os
-from scripts import download_and_split, get_musixmatch, get_whisper
+from scripts import get_title, download_and_split, get_musixmatch, get_whisper
 from match_words import get_karaoke_lines
 
 parser = argparse.ArgumentParser(description="Generates timestamped lyrics and a vocal-less karaoke track, given an English song with lyrics on Spotify.")
@@ -19,6 +19,8 @@ def get_karaoke(name: str,
     spotify_id: str,
     OUTPUT_DIR: str,
     MAX_TIME_DIF: int = 2):
+
+    title = get_title(name, artists)
     
     # Make the necessary directories if they don't already exist
     pytube_dir = os.path.join(OUTPUT_DIR, "pytube")
@@ -27,10 +29,10 @@ def get_karaoke(name: str,
     spleeter_dir = os.path.join(OUTPUT_DIR, "spleeter")
     Path(spleeter_dir).mkdir(parents=True, exist_ok=True)
 
-    lyrics_dir = os.path.join(OUTPUT_DIR, "lyrics")
+    lyrics_dir = os.path.join(OUTPUT_DIR, "lyrics", title)
     Path(lyrics_dir).mkdir(parents=True, exist_ok=True)
 
-    vocals, karaoke_track = download_and_split(name, artists, length, pytube_dir, spleeter_dir)
+    vocals, karaoke_track = download_and_split(title, length, pytube_dir, spleeter_dir)
     musixmatch = get_musixmatch(spotify_id, lyrics_dir)
     whisper = get_whisper(vocals, lyrics_dir)
 

@@ -11,15 +11,7 @@ from spleeter.separator import Separator
 
 separator = Separator("spleeter:2stems")
 
-def download_and_split(
-    name: str,
-    artists: list[str],
-    length: int,
-    pytube_dir: str,
-    spleeter_dir: str,
-    MAX_TIME_DIF: int = 2
-) -> (str, str):
-    """Downloads a song from YouTube and splits into 2 stems. Returns path to vocals and accompaniment audio files."""
+def get_title(name: str, artists: list[str],):
     # Create search query for song by combining artists' and song's names
     title = ""
     for artist in artists:
@@ -31,6 +23,11 @@ def download_and_split(
     white_space = re.compile("\s+")
     title = re.sub(alphanumeric, "", title)
     title = re.sub(white_space, "-", title)
+
+    return title
+
+def download_and_split(title, length: int, pytube_dir: str, spleeter_dir: str, MAX_TIME_DIF: int = 2) -> (str, str):
+    """Downloads a song from YouTube and splits into 2 stems. Returns path to vocals and accompaniment audio files."""
 
     vocals_path = os.path.join(spleeter_dir, title, "vocals.wav")
     accompaniment_path = os.path.join(spleeter_dir, title, "accompaniment.wav")
