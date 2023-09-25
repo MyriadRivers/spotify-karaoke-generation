@@ -12,7 +12,11 @@ from spleeter.separator import Separator
 
 separator = Separator("spleeter:2stems")
 
-def get_title(name: str, artists: list[str],):
+
+def get_title(
+    name: str,
+    artists: list[str],
+):
     # Create search query for song by combining artists' and song's names
     title = ""
     for artist in artists:
@@ -54,6 +58,7 @@ def download_and_split(title, length: int, pytube_dir: str, spleeter_dir: str, M
 
             return vocals_path, accompaniment_path
 
+
 def get_musixmatch(track_id: str, lyrics_dir: str):
     """Retrieves the musixmatch lyrics, downloads to a json file, and returns the path."""
     musixmatch_path = os.path.join(lyrics_dir, "musixmatch.json")
@@ -65,11 +70,12 @@ def get_musixmatch(track_id: str, lyrics_dir: str):
     res = requests.get(f"https://spotify-lyric-api.herokuapp.com/?trackid={track_id}")
     musixmatch_lyrics = res.json()
 
-    with open(musixmatch_path, 'w') as f:
+    with open(musixmatch_path, "w") as f:
         json.dump(musixmatch_lyrics, f)
         print("Writing musixmatch lyrics json to " + musixmatch_path)
 
     return musixmatch_path
+
 
 def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
     whisper_path = os.path.join(lyrics_dir, "whisper.json")
@@ -92,9 +98,7 @@ def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
 
     # 1. Transcribe with original whisper (batched)file:///home/jason/Downloads/call-me-maybe.mp3
 
-    model = whisperx.load_model(
-        size, device, compute_type=compute_type, language="en"
-    )
+    model = whisperx.load_model(size, device, compute_type=compute_type, language="en")
 
     audio = whisperx.load_audio(speech_audio_file)
     result = model.transcribe(audio, batch_size=batch_size, language="en")
@@ -107,13 +111,19 @@ def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
     # 2. Align whisper output
     model_a, metadata = whisperx.load_align_model(language_code="en", device=device)
     result = whisperx.align(
-        result["segments"], model_a, metadata, audio, device, return_char_alignments=False
+        result["segments"],
+        model_a,
+        metadata,
+        audio,
+        device,
+        return_char_alignments=False,
     )
 
-    with open(whisper_path, 'w') as f:
+    with open(whisper_path, "w") as f:
         json.dump(result["segments"], f)
         print("Writing whisper transcription json to " + whisper_path)
 
     return whisper_path
+
 
 # get_musixmatch("3TGRqZ0a2l1LRblBkJoaDx")

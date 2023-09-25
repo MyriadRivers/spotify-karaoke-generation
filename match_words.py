@@ -607,7 +607,7 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
                     else max(
                         whisper_words[-1]["endTime"]
                         + w_last_syl_length * (m_syl_total - w_syl_total),
-                        int(musixmatch_data["lyrics"]["lines"][-1]["startTimeMs"]),
+                        int(musixmatch_data["lines"][-1]["startTimeMs"]),
                     )
                 )
 
@@ -651,10 +651,11 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
 
     #     print(k_line_string)
 
-    with open(karaoke_path, 'w') as f:
+    with open(karaoke_path, "w") as f:
         json.dump(karaoke_lines, f)
         print("Writing word-level timestamped lyrics json to " + karaoke_path)
 
     return karaoke_path
+
 
 # print(get_karaoke_lines("no-culture-syrics.json", "no-culture-whisper.json"))
