@@ -1,0 +1,14 @@
+name: spotify-karaoke
+channels:
+ - defaults
+dependencies:
+ - pip
+ - pip:
+   - spleeter
+   - boto3
+   - gql[all]
+   - nltk
+   - pytube
+   - Requests
+   - protobuf==3.20
+   - git+https://github.com/m-bain/whisperx.git

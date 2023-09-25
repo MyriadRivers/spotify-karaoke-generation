@@ -5,6 +5,7 @@ import json
 import torch
 import requests
 from pathlib import Path
+from typing import Tuple
 
 from pytube import Search
 from spleeter.separator import Separator
@@ -26,7 +27,7 @@ def get_title(name: str, artists: list[str],):
 
     return title
 
-def download_and_split(title, length: int, pytube_dir: str, spleeter_dir: str, MAX_TIME_DIF: int = 2) -> (str, str):
+def download_and_split(title, length: int, pytube_dir: str, spleeter_dir: str, MAX_TIME_DIF: int = 2) -> Tuple[str, str]:
     """Downloads a song from YouTube and splits into 2 stems. Returns path to vocals and accompaniment audio files."""
 
     vocals_path = os.path.join(spleeter_dir, title, "vocals.wav")
@@ -54,6 +55,7 @@ def download_and_split(title, length: int, pytube_dir: str, spleeter_dir: str, M
             return vocals_path, accompaniment_path
 
 def get_musixmatch(track_id: str, lyrics_dir: str):
+    """Retrieves the musixmatch lyrics, downloads to a json file, and returns the path."""
     musixmatch_path = os.path.join(lyrics_dir, "musixmatch.json")
 
     if os.path.exists(musixmatch_path):
