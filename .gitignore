@@ -165,3 +165,8 @@ cython_debug/
 /pretrained_models
 *.mp3
 *.wav
+*.txt
+# Temporary file for generating the json_string while the backend connection is mocked up
+json_string.py
+# Ignore all the output directories, which are 22 alphanumeric characters
+/[0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]

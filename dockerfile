@@ -11,11 +11,14 @@ USER micromamba
 RUN micromamba install -y -n base python=3.10 -c defaults
 RUN micromamba install -y -n base ffmpeg libsndfile -c conda-forge
 RUN micromamba install -y -n base pytorch==2.0.0 torchaudio==2.0.0 pytorch-cuda=11.8 -c pytorch -c nvidia -c defaults
+USER root
 COPY environment.yaml environment.yaml
 RUN micromamba install -y -n base -f environment.yaml && micromamba clean --all --yes
 
-USER root
 RUN apt update && apt install -y ffmpeg
+
+# pytube hotfix
+# RUN sed -i 's/transform_plan_raw =.*/transform_plan_raw = js/g' /opt/conda/lib/python3.10/site-packages/pytube/cipher.py
 
 # Copy all the python files
 COPY syllabify syllabify

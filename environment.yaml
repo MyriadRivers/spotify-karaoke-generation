@@ -2,8 +2,11 @@ name: spotify-karaoke
 channels:
  - defaults
 dependencies:
+ - cudatoolkit=10.0.130
+ - cudnn=7.3.1
  - pip
  - pip:
+  #  - tensorflow-gpu==2.5
    - spleeter
    - boto3
    - gql[all]

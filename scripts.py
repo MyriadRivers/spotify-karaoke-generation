@@ -54,8 +54,10 @@ def download_and_split(title, length: int, pytube_dir: str, spleeter_dir: str, M
                 print("Downloading to " + song_path)
                 song_path = streams[0].download(pytube_dir, title)
 
+            print("separating to 2 stems at " + spleeter_dir)
             separator.separate_to_file(song_path, spleeter_dir)
 
+            print("returning stem locations...")
             return vocals_path, accompaniment_path
 
 
@@ -93,8 +95,8 @@ def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
     if not torch.cuda.is_available():
         device = "cpu"
         print("No CUDA device detected. Running on CPU!")
-        compute_type = "int8"
-        size = "medium"
+        compute_type = "float16"
+        size = "large-v2"
 
     # 1. Transcribe with original whisper (batched)file:///home/jason/Downloads/call-me-maybe.mp3
 

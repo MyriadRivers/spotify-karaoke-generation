@@ -19,13 +19,13 @@ from gql.transport.appsync_auth import AppSyncApiKeyAuthentication
 
 import boto3
 
-# parser = argparse.ArgumentParser(description="Generates timestamped lyrics and a vocal-less karaoke track, given an English song with lyrics on Spotify.")
-# parser.add_argument("-s", "--song", type=str, required=True, help="name of the song")
-# parser.add_argument("-a", "--artists", type=str, nargs="+", required=True, help="space separated list of artists")
-# parser.add_argument("-d", "--duration", type=float, required=True, help="duration of song in seconds")
-# parser.add_argument("-i", "--id", type=str, required=True, help="Spotify track ID")
+parser = argparse.ArgumentParser(description="Generates timestamped lyrics and a vocal-less karaoke track, given an English song with lyrics on Spotify.")
+parser.add_argument("-s", "--song", type=str, required=True, help="name of the song")
+parser.add_argument("-a", "--artists", type=str, nargs="+", required=True, help="space separated list of artists")
+parser.add_argument("-d", "--duration", type=float, required=True, help="duration of song in seconds")
+parser.add_argument("-i", "--id", type=str, required=True, help="Spotify track ID")
 
-# args = parser.parse_args()
+args = parser.parse_args()
 
 S3 = boto3.client("s3")
 BUCKET = "spotify-karaoke"
@@ -90,12 +90,14 @@ def get_karaoke(name: str,
     lyrics_dir = os.path.join(spotify_id, "lyrics", title)
     Path(lyrics_dir).mkdir(parents=True, exist_ok=True)
 
+    print("Downloading from YouTube and splitting...")
     vocals, karaoke_track = download_and_split(title, length, pytube_dir, spleeter_dir)
     musixmatch = get_musixmatch(spotify_id, lyrics_dir)
     whisper = get_whisper(vocals, lyrics_dir)
 
     lyrics_json = get_karaoke_lines(musixmatch, whisper, lyrics_dir)
 
+    print("Uploading lyric and karaoke track files...")
     # Upload voiceless accompaniment track and timestamped lyrics to S3
     S3.upload_file(lyrics_json, BUCKET, lyrics_key)
     S3.upload_file(karaoke_track, BUCKET, track_key)
@@ -152,9 +154,9 @@ async def main():
 
                 task = asyncio.create_task(add_karaoke_mutation(http_session, result["requestedKaraoke"]))
 
-loop = asyncio.get_event_loop()
-p = ProcessPoolExecutor(4)
-loop.run_until_complete(main())
+# loop = asyncio.get_event_loop()
+# p = ProcessPoolExecutor(2)
+# loop.run_until_complete(main())
 
-# get_karaoke(args.song, args.artists, args.duration, args.id)
+get_karaoke(args.song, args.artists, args.duration, args.id)
 

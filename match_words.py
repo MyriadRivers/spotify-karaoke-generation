@@ -85,6 +85,9 @@ def get_musixmatch_data(musixmatch_json) -> (list[list[dict]], list[dict], list[
         line["words"] = re.sub(r"\(+", "", line["words"])
         line["words"] = re.sub(r"\)+", "", line["words"])
 
+        # Delete all unicode characters, such as the music note character
+        line["words"] = re.sub(r"\\u[a-fA-F0-9]{4}", "", line["words"])
+
         words = re.split(r"[\s-]+", line["words"])
         line_lyrics = []
 
