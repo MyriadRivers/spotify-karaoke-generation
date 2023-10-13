@@ -89,13 +89,13 @@ def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
     device = "cuda"
     batch_size = 16  # reduce if low on GPU mem
     compute_type = "float16"  # change to "int8" if low on GPU mem (may reduce accuracy)
-    size = "large-v2"
+    size = "large-v2" # change to "medium" if low on memory
 
     # Default to CPU if no compatible GPU detected
     if not torch.cuda.is_available():
         device = "cpu"
         print("No CUDA device detected. Running on CPU!")
-        compute_type = "float16"
+        compute_type = "int8"
         size = "large-v2"
 
     # 1. Transcribe with original whisper (batched)file:///home/jason/Downloads/call-me-maybe.mp3
