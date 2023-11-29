@@ -30,7 +30,7 @@ import boto3
 # args = parser.parse_args()
 
 S3 = boto3.client("s3")
-BUCKET = "spotify-karaoke"
+BUCKET = os.environ.get("S3_BUCKET_NAME")
 
 # GraphQL Queries
 SUBSCRIPTION = gql("""
