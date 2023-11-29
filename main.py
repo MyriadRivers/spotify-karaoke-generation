@@ -12,7 +12,7 @@ import asyncio
 from concurrent.futures import ProcessPoolExecutor
 
 from gql import Client, gql
-from gql.transport.appsync_websockets import AppSyncWebsocketsTransport
+from gql.transport.websockets import WebsocketsTransport
 from gql.transport.aiohttp import AIOHTTPTransport
 
 from gql.transport.appsync_auth import AppSyncApiKeyAuthentication
@@ -43,11 +43,8 @@ subscription RequestedKaraoke {
 """)
                    
 MUTATION = gql("""
-mutation AddKaraoke($name: String! , $artists: [String!]!, $duration: Float!, $id: String!, $lyrics: AWSJSON!, $url: String!) {
-  addKaraoke(name: $name, artists: $artists, duration: $duration, id: $id, lyrics: $lyrics, url: $url) {
-    name
-    artists
-    duration
+mutation AddKaraoke($id: String!, $lyrics: String!, $url: String!) {
+  addKaraoke(id: $id, lyrics: $lyrics, url: $url) {
     id
   }
 }
@@ -121,28 +118,22 @@ async def add_karaoke_mutation(http_session, req):
         lyrics_json = json.load(f)
 
     lyrics_json_string = json.dumps(lyrics_json)
-    mutation_vars = {"name": req["name"], "artists": req["artists"], "duration": req["duration"], "id": req["id"], "lyrics": lyrics_json_string, "url": karaoke_url}
+    mutation_vars = {"id": req["id"], "lyrics": lyrics_json_string, "url": karaoke_url}
 
     result = await http_session.execute(MUTATION, variable_values=mutation_vars)
     return result
 
 
 async def main():
-    API_URL = "https://45uu7k6g6vdt3agqreaw4gytoa.appsync-api.us-east-1.amazonaws.com/graphql"
-    HOST = API_URL.replace("https://", "").replace("/graphql", "")
+    API_URL = "https://spotify-karaoke-api-fabe17189228.herokuapp.com/"
+    WS_URL = API_URL.replace("https://", "ws://").replace("/graphql", "")
 
-    # auth = AppSyncApiKeyAuthentication(
-    #     host=HOST,
-    #     api_key="da2-eccjoab2rnfaxjdd2nbw35ar74",
-    # )
-
-    print(f"Host: {HOST}")
 
     if torch.cuda.is_available():
         print("CUDA device detected, ignoring TF warnings about AVX...")
         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-    realtime_transport = AppSyncWebsocketsTransport(url=API_URL)
+    realtime_transport = WebsocketsTransport(url=WS_URL)
     http_transport = AIOHTTPTransport(url=API_URL, auth=realtime_transport.auth)
 
     async with Client(transport=realtime_transport) as session:
@@ -154,9 +145,9 @@ async def main():
 
                 task = asyncio.create_task(add_karaoke_mutation(http_session, result["requestedKaraoke"]))
 
-# loop = asyncio.get_event_loop()
-# p = ProcessPoolExecutor(2)
-# loop.run_until_complete(main())
+loop = asyncio.get_event_loop()
+p = ProcessPoolExecutor(2)
+loop.run_until_complete(main())
 
-get_karaoke(args.song, args.artists, args.duration, args.id)
+# get_karaoke(args.song, args.artists, args.duration, args.id)
 
