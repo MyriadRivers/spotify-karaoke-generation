@@ -54,7 +54,7 @@ def download_and_split(title, length: int, pytube_dir: str, spleeter_dir: str, M
                 print("Downloading to " + song_path)
                 song_path = streams[0].download(pytube_dir, title)
 
-            print("separating to 2 stems at " + spleeter_dir)
+            print("separating " + song_path + " to 2 stems at " + spleeter_dir)
             separator.separate_to_file(song_path, spleeter_dir)
 
             print("returning stem locations...")
@@ -69,7 +69,7 @@ def get_musixmatch(track_id: str, lyrics_dir: str):
         print("Musixmatch lyrics json already exists. Returning path.")
         return musixmatch_path
 
-    res = requests.get(f"https://spotify-lyric-api.herokuapp.com/?trackid={track_id}")
+    res = requests.get(f"https://spotify-lyric-api-984e7b4face0.herokuapp.com/?trackid={track_id}")
     musixmatch_lyrics = res.json()
 
     with open(musixmatch_path, "w") as f:

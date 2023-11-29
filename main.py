@@ -19,13 +19,15 @@ from gql.transport.appsync_auth import AppSyncApiKeyAuthentication
 
 import boto3
 
-parser = argparse.ArgumentParser(description="Generates timestamped lyrics and a vocal-less karaoke track, given an English song with lyrics on Spotify.")
-parser.add_argument("-s", "--song", type=str, required=True, help="name of the song")
-parser.add_argument("-a", "--artists", type=str, nargs="+", required=True, help="space separated list of artists")
-parser.add_argument("-d", "--duration", type=float, required=True, help="duration of song in seconds")
-parser.add_argument("-i", "--id", type=str, required=True, help="Spotify track ID")
+# Uncomment these lines when using as a one off function called on command line (as opposed to a server)
 
-args = parser.parse_args()
+# parser = argparse.ArgumentParser(description="Generates timestamped lyrics and a vocal-less karaoke track, given an English song with lyrics on Spotify.")
+# parser.add_argument("-s", "--song", type=str, required=True, help="name of the song")
+# parser.add_argument("-a", "--artists", type=str, nargs="+", required=True, help="space separated list of artists")
+# parser.add_argument("-d", "--duration", type=float, required=True, help="duration of song in seconds")
+# parser.add_argument("-i", "--id", type=str, required=True, help="Spotify track ID")
+
+# args = parser.parse_args()
 
 S3 = boto3.client("s3")
 BUCKET = "spotify-karaoke"
@@ -109,7 +111,8 @@ def get_karaoke(name: str,
 
 async def add_karaoke_mutation(http_session, req):
     # Save temporary files for song in a folder in the container named after the unique spotify track ID
-    lyrics_key, karaoke_url = await loop.run_in_executor(p, get_karaoke, req["name"], req["artists"], req["duration"], req["id"])
+    # lyrics_key, karaoke_url = await loop.run_in_executor(p, get_karaoke, req["name"], req["artists"], req["duration"], req["id"])
+    lyrics_key, karaoke_url = get_karaoke(req["name"], req["artists"], req["duration"], req["id"])
 
     local_lyrics_file = req["id"] + ".json"
     print("Downloading lyrics json...")
@@ -134,7 +137,8 @@ async def main():
         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
     realtime_transport = WebsocketsTransport(url=WS_URL)
-    http_transport = AIOHTTPTransport(url=API_URL, auth=realtime_transport.auth)
+    # http_transport = AIOHTTPTransport(url=API_URL, auth=realtime_transport.auth)
+    http_transport = AIOHTTPTransport(url=API_URL)
 
     async with Client(transport=realtime_transport) as session:
         async with Client(transport=http_transport, fetch_schema_from_transport=False) as http_session:
@@ -146,7 +150,7 @@ async def main():
                 task = asyncio.create_task(add_karaoke_mutation(http_session, result["requestedKaraoke"]))
 
 loop = asyncio.get_event_loop()
-p = ProcessPoolExecutor(2)
+# p = ProcessPoolExecutor(4)
 loop.run_until_complete(main())
 
 # get_karaoke(args.song, args.artists, args.duration, args.id)
