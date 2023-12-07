@@ -13,6 +13,7 @@ from concurrent.futures import ProcessPoolExecutor
 
 from gql import Client, gql
 from gql.transport.websockets import WebsocketsTransport
+from gql.transport.appsync_websockets import AppSyncWebsocketsTransport
 from gql.transport.aiohttp import AIOHTTPTransport
 
 from gql.transport.appsync_auth import AppSyncApiKeyAuthentication
@@ -30,7 +31,8 @@ import boto3
 # args = parser.parse_args()
 
 S3 = boto3.client("s3")
-BUCKET = os.environ.get("S3_BUCKET_NAME")
+# BUCKET = os.environ.get("S3_BUCKET_NAME")
+BUCKET = "spotify-karaoke"
 
 # GraphQL Queries
 SUBSCRIPTION = gql("""
@@ -45,9 +47,11 @@ subscription RequestedKaraoke {
 """)
                    
 MUTATION = gql("""
-mutation AddKaraoke($id: String!, $lyrics: String!, $url: String!) {
+mutation AddKaraoke($id: String!, $lyrics: AWSJSON!, $url: String!) {
   addKaraoke(id: $id, lyrics: $lyrics, url: $url) {
-    id
+    id,
+    lyrics,
+    url
   }
 }
 """)
@@ -121,14 +125,17 @@ async def add_karaoke_mutation(http_session, req):
         lyrics_json = json.load(f)
 
     lyrics_json_string = json.dumps(lyrics_json)
+    os.remove(local_lyrics_file)
     mutation_vars = {"id": req["id"], "lyrics": lyrics_json_string, "url": karaoke_url}
-
+    
+    print("Sending karaoke with id " + str(mutation_vars["id"]))
     result = await http_session.execute(MUTATION, variable_values=mutation_vars)
+
     return result
 
 
 async def main():
-    API_URL = "https://spotify-karaoke-api-fabe17189228.herokuapp.com/"
+    API_URL = "https://rn742wctergrveqhvgxo6tg7na.appsync-api.us-east-1.amazonaws.com/graphql"
     WS_URL = API_URL.replace("https://", "ws://").replace("/graphql", "")
 
 
@@ -136,15 +143,17 @@ async def main():
         print("CUDA device detected, ignoring TF warnings about AVX...")
         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-    realtime_transport = WebsocketsTransport(url=WS_URL)
-    # http_transport = AIOHTTPTransport(url=API_URL, auth=realtime_transport.auth)
-    http_transport = AIOHTTPTransport(url=API_URL)
+    # realtime_transport = WebsocketsTransport(url=WS_URL)
+    realtime_transport = AppSyncWebsocketsTransport(url=API_URL)
+    http_transport = AIOHTTPTransport(url=API_URL, auth=realtime_transport.auth)
+    # http_transport = AIOHTTPTransport(url=API_URL)
 
     async with Client(transport=realtime_transport) as session:
         async with Client(transport=http_transport, fetch_schema_from_transport=False) as http_session:
             print("Waiting for messages...")
 
             async for result in session.subscribe(SUBSCRIPTION):
+                print(result)
                 print(result["requestedKaraoke"])
 
                 task = asyncio.create_task(add_karaoke_mutation(http_session, result["requestedKaraoke"]))
