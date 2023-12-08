@@ -87,7 +87,7 @@ def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
         return whisper_path
 
     device = "cuda"
-    batch_size = 16  # reduce if low on GPU mem
+    batch_size = 8  # reduce if low on GPU mem
     compute_type = "float16"  # change to "int8" if low on GPU mem (may reduce accuracy)
     size = "large-v2" # change to "medium" if low on memory
 
@@ -100,10 +100,10 @@ def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
 
     # 1. Transcribe with original whisper (batched)file:///home/jason/Downloads/call-me-maybe.mp3
 
-    model = whisperx.load_model(size, device, compute_type=compute_type)
+    model = whisperx.load_model(size, device, compute_type=compute_type, language="en")
 
     audio = whisperx.load_audio(speech_audio_file)
-    result = model.transcribe(audio, batch_size=batch_size)
+    result = model.transcribe(audio, batch_size=batch_size, language="en")
 
     # delete model if low on GPU resources
     # gc.collect()
@@ -111,7 +111,7 @@ def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
     # del model
 
     # 2. Align whisper output
-    model_a, metadata = whisperx.load_align_model(language_code=result["language"], device=device)
+    model_a, metadata = whisperx.load_align_model(language_code="en", device=device)
     result = whisperx.align(
         result["segments"],
         model_a,
