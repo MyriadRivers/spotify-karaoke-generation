@@ -87,7 +87,7 @@ def get_whisper(speech_audio_file: str, lyrics_dir: str) -> str:
         return whisper_path
 
     device = "cuda"
-    batch_size = 8  # reduce if low on GPU mem
+    batch_size = 16  # reduce if low on GPU mem
     compute_type = "float16"  # change to "int8" if low on GPU mem (may reduce accuracy)
     size = "large-v2" # change to "medium" if low on memory
 
