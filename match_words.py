@@ -95,8 +95,8 @@ def get_musixmatch_data(musixmatch_json) -> (list[list[dict]], list[dict], list[
         words = re.split(r"[\s-]+", line["words"])
         line_lyrics = []
 
-        # Filter out empty words
-        words = [w for w in words if w != ""]
+        # Filter out empty words and words with no syllables, e.g. "..."
+        words = [w for w in words if (w != "") and (count_syllables(w) != 0)]
 
         for i in range(len(words)):
             start_time = int(line["startTimeMs"]) if i == 0 else None
@@ -337,6 +337,9 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
             ):
                 trace_prev_m = match_arr[trace_m_i - 1][trace_w_i]
                 trace_prev_w = match_arr[trace_m_i][trace_w_i - 1]
+
+                # print(str(w_word_i) + " " + str(len(w_words_copy)))
+                # print(str(trace_w_i + w_word_i - w_line_len - 1))
                 
                 if match(
                     m_words_copy[trace_m_i + m_word_i - m_line_len - 1]["word"],
@@ -636,11 +639,17 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
                         {"startTime": syl_start_time, "endTime": syl_end_time}
                     )
 
+            # Debug the words in every gap
+            
+            # m_gap_words = [musixmatch_words[i]["word"] for i in m_gap_indices]
+            # w_gap_words = [whisper_words[i]["word"] for i in w_gap_indices]
+            # print(m_gap_words)
+            # print(w_gap_words)
+
             # Assign timestamps to the unmatched musixmatch words from whisperwords by syllable count
             for syl_i, gap_i in enumerate(m_gap_indices):
-                musixmatch_words[gap_i]["startTime"] = w_syl_timestamps[syl_i][
-                    "startTime"
-                ]
+                print(str(len(w_syl_timestamps)) + " " + str(syl_i))
+                musixmatch_words[gap_i]["startTime"] = w_syl_timestamps[syl_i]["startTime"]
                 musixmatch_words[gap_i]["endTime"] = w_syl_timestamps[syl_i]["endTime"]
 
         prev_i = i
@@ -669,3 +678,6 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
 
 
 # print(get_karaoke_lines("no-culture-syrics.json", "no-culture-whisper.json"))
+# get_karaoke_lines("64FzgoLZ3oXu2SriZblHic/lyrics/Taylor-Swift-Bad-Blood-Taylors-Version/musixmatch.json", 
+#                   "64FzgoLZ3oXu2SriZblHic/lyrics/Taylor-Swift-Bad-Blood-Taylors-Version/whisper.json", 
+#                   "64FzgoLZ3oXu2SriZblHic/lyrics")
