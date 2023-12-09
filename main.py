@@ -107,7 +107,7 @@ def get_karaoke(name: str,
 
     track_url = S3.generate_presigned_url("get_object", Params={"Bucket": BUCKET, "Key": track_key}, ExpiresIn=3600)
     # Delete temporary directory
-    shutil.rmtree(spotify_id)
+    # shutil.rmtree(spotify_id)
     print("Deleting temporary directory " + spotify_id + "...")
     
     return lyrics_key, track_url

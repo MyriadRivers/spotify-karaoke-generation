@@ -8,8 +8,10 @@ def match(word1: str, word2: str) -> bool:
     """
     How to determine word equivalence. Right now they have to be the same, but later maybe consider pronunciation.
     """
-    word1 = re.sub(r"[^\w']+", "", word1).lower()
-    word2 = re.sub(r"[^\w']+", "", word2).lower()
+    temp_word1 = word1
+    temp_word2 = word2
+    temp_word1 = re.sub(r"[^\w']+", "", temp_word1).lower()
+    temp_word2 = re.sub(r"[^\w']+", "", temp_word2).lower()
 
     # Check equality by if words have the same nucleus, similar to if they rhyme they're close enough
     # if generate(word1.rstrip()) == None or generate(word2.rstrip()) == None:
@@ -22,12 +24,12 @@ def match(word1: str, word2: str) -> bool:
     # and syllables1[0].get_nucleus() == syllables2[0].get_nucleus()
 
     # gerunds that end in " ing " versus " in' " are the same word
-    if word1.endswith("ing") and word2.endswith("in'"):
-        word1 = word1[:-1] + "'"
-    if word1.endswith("in'") and word2.endswith("ing"):
-        word2 = word2[:-1] + "'"
+    if temp_word1.endswith("ing") and temp_word2.endswith("in'"):
+        temp_word1 = temp_word1[:-1] + "'"
+    if temp_word1.endswith("in'") and temp_word2.endswith("ing"):
+        temp_word2 = temp_word2[:-1] + "'"
 
-    return word1 == word2
+    return temp_word1 == temp_word2
 
 
 def guess_syllables(word):
@@ -235,6 +237,9 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
     def get_word_match_indices(
         m_lines, w_lines, m_words, w_words
     ) -> (list[int], list[int]):
+        m_words_copy = m_words[:]
+        w_words_copy = w_words[:]
+
         line_count = len(m_lines)
         m_word_i = 0
         w_word_i = 0
@@ -332,10 +337,10 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
             ):
                 trace_prev_m = match_arr[trace_m_i - 1][trace_w_i]
                 trace_prev_w = match_arr[trace_m_i][trace_w_i - 1]
-
+                
                 if match(
-                    m_words[trace_m_i + m_word_i - m_line_len - 1]["word"],
-                    w_words[trace_w_i + w_word_i - w_line_len - 1]["word"],
+                    m_words_copy[trace_m_i + m_word_i - m_line_len - 1]["word"],
+                    w_words_copy[trace_w_i + w_word_i - w_line_len - 1]["word"],
                 ):
                     matches = match_arr[trace_m_i][trace_w_i]["matches"]
                     syl_dif = match_arr[trace_m_i][trace_w_i]["syl_dif"]
