@@ -387,8 +387,8 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
                 m_word_i - m_line_len not in matches_m
                 and w_word_i - w_line_len not in matches_w
             ):
-                print(len(whisper_words))
-                print(str(w_word_i) + " " + str(w_line_len) + " " + str(w_word_i - w_line_len))
+                # print(len(whisper_words))
+                # print(str(w_word_i) + " " + str(w_line_len) + " " + str(w_word_i - w_line_len))
                 # Alter whisper words to break apart first word of the line so remaining syllables can still be matched
                 m_fir = musixmatch_words[m_word_i - m_line_len]
                 w_fir = whisper_words[w_word_i - w_line_len]
@@ -680,8 +680,7 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
 
     return karaoke_path
 
-
 # print(get_karaoke_lines("no-culture-syrics.json", "no-culture-whisper.json"))
 # get_karaoke_lines("7wjmwD5nIYWVnHiR3X3PTO/lyrics/Cory-Wong-Cody-Fry-Golden/musixmatch.json", 
 #                   "7wjmwD5nIYWVnHiR3X3PTO/lyrics/Cory-Wong-Cody-Fry-Golden/whisper.json", 
-#                   "7wjmwD5nIYWVnHiR3X3PTO/lyrics/")
+#                   "7wjmwD5nIYWVnHiR3X3PTO/lyrics/Cory-Wong-Cody-Fry-Golden/")
