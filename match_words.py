@@ -237,8 +237,8 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
     def get_word_match_indices(
         m_lines, w_lines, m_words, w_words
     ) -> (list[int], list[int]):
-        m_words_copy = m_words[:]
-        w_words_copy = w_words[:]
+        # m_words = m_words[:]
+        # w_words = w_words[:]
 
         line_count = len(m_lines)
         m_word_i = 0
@@ -342,8 +342,8 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
                 # print(str(trace_w_i + w_word_i - w_line_len - 1))
                 
                 if match(
-                    m_words_copy[trace_m_i + m_word_i - m_line_len - 1]["word"],
-                    w_words_copy[trace_w_i + w_word_i - w_line_len - 1]["word"],
+                    m_words[trace_m_i + m_word_i - m_line_len - 1]["word"],
+                    w_words[trace_w_i + w_word_i - w_line_len - 1]["word"],
                 ):
                     matches = match_arr[trace_m_i][trace_w_i]["matches"]
                     syl_dif = match_arr[trace_m_i][trace_w_i]["syl_dif"]
@@ -387,6 +387,8 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
                 m_word_i - m_line_len not in matches_m
                 and w_word_i - w_line_len not in matches_w
             ):
+                print(len(whisper_words))
+                print(str(w_word_i) + " " + str(w_line_len) + " " + str(w_word_i - w_line_len))
                 # Alter whisper words to break apart first word of the line so remaining syllables can still be matched
                 m_fir = musixmatch_words[m_word_i - m_line_len]
                 w_fir = whisper_words[w_word_i - w_line_len]
@@ -469,6 +471,8 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
                     # Delete them in reverse order to not throw off the indices
                     for index in sorted(w_indices_deleted, reverse=True):
                         del whisper_words[index]
+                        w_word_i -= 1
+                        w_line_len -= 1
 
                     # Adjust matches by the number of words we deleted
                     matches_w = [(w - len(w_indices_deleted)) for w in matches_w]
@@ -678,6 +682,6 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
 
 
 # print(get_karaoke_lines("no-culture-syrics.json", "no-culture-whisper.json"))
-# get_karaoke_lines("64FzgoLZ3oXu2SriZblHic/lyrics/Taylor-Swift-Bad-Blood-Taylors-Version/musixmatch.json", 
-#                   "64FzgoLZ3oXu2SriZblHic/lyrics/Taylor-Swift-Bad-Blood-Taylors-Version/whisper.json", 
-#                   "64FzgoLZ3oXu2SriZblHic/lyrics")
+# get_karaoke_lines("7wjmwD5nIYWVnHiR3X3PTO/lyrics/Cory-Wong-Cody-Fry-Golden/musixmatch.json", 
+#                   "7wjmwD5nIYWVnHiR3X3PTO/lyrics/Cory-Wong-Cody-Fry-Golden/whisper.json", 
+#                   "7wjmwD5nIYWVnHiR3X3PTO/lyrics/")
