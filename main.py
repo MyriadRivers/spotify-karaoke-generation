@@ -125,6 +125,7 @@ async def add_karaoke_mutation(http_session, req):
         lyrics_json = json.load(f)
 
     lyrics_json_string = json.dumps(lyrics_json)
+    # delete temporary lyrics file
     os.remove(local_lyrics_file)
     mutation_vars = {"id": req["id"], "lyrics": lyrics_json_string, "url": karaoke_url}
     

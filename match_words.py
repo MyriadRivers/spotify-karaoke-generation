@@ -640,7 +640,7 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
                     )
 
             # Debug the words in every gap
-            
+
             # m_gap_words = [musixmatch_words[i]["word"] for i in m_gap_indices]
             # w_gap_words = [whisper_words[i]["word"] for i in w_gap_indices]
             # print(m_gap_words)
@@ -648,7 +648,7 @@ def get_karaoke_lines(m_path: str, w_path: str, lyrics_dir: str) -> str:
 
             # Assign timestamps to the unmatched musixmatch words from whisperwords by syllable count
             for syl_i, gap_i in enumerate(m_gap_indices):
-                print(str(len(w_syl_timestamps)) + " " + str(syl_i))
+                # print(str(len(w_syl_timestamps)) + " " + str(syl_i))
                 musixmatch_words[gap_i]["startTime"] = w_syl_timestamps[syl_i]["startTime"]
                 musixmatch_words[gap_i]["endTime"] = w_syl_timestamps[syl_i]["endTime"]
 
