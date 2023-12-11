@@ -159,14 +159,14 @@ async def main():
 
                 task = asyncio.create_task(add_karaoke_mutation(http_session, result["requestedKaraoke"]))
 
-def exception_handler(loop, context):
-    print("Caught an exception:", context['message'])
-    loop.default_exception_handler(context)
+# def exception_handler(loop, context):
+#     print("Caught an exception:", context['message'])
+#     loop.default_exception_handler(context)
 
 loop = asyncio.get_event_loop()
 # p = ProcessPoolExecutor(4)
 loop.run_until_complete(main())
-loop.set_exception_handler(exception_handler)
+# loop.set_exception_handler(exception_handler)
 
 # get_karaoke(args.song, args.artists, args.duration, args.id)
 
